@@ -8,11 +8,12 @@ import java.util.regex.Pattern;
 import com.akalea.utils.jproxy.domain.Proxy;
 import com.google.common.collect.Lists;
 
-public class HtmlTableParser implements ProxyListParser {
+public class HtmlTableRegexParser implements ProxyListParser {
 
     private Pattern pattern =
         Pattern.compile(
-            "<td[^<>]*>([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})</td><td[^<>]*>([1-9][0-9]{1,4})</td>");
+            "<td[^<>]*>([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})</td>"
+                + "<td[^<>]*>([1-9][0-9]{1,4})</td>");
 
     private String parserId = "html";
 

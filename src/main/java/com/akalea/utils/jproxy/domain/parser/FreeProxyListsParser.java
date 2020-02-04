@@ -24,7 +24,7 @@ public class FreeProxyListsParser implements ProxyListParser {
     @Override
     public List<Proxy> parse(String content) {
         String preprocessed = preprocessContent(content);
-        return new HtmlTableParser().parse(preprocessed);
+        return new HtmlTableRegexParser().parse(preprocessed);
     }
 
     private String preprocessContent(String content) {
