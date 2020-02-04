@@ -1,6 +1,5 @@
 package com.akalea.utils.jproxy.domain.parser;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +11,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.akalea.utils.jproxy.domain.Proxy;
-import com.google.common.collect.Lists;
 
 public class HtmlTableJsoupParser implements ProxyListParser {
 
