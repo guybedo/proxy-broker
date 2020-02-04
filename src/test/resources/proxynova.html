@@ -1,0 +1,1961 @@
+
+<!DOCTYPE HTML>
+<html lang="en" dir="ltr" class="no-js">
+<head>
+
+<title>Proxy Server List - List of Free Public Proxy Servers (Updated February 2020)</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="msvalidate.01" content="F9BD470E5BD97F178C18C062EAF0853E" />
+<meta name="google-site-verification" content="bMnUySWmhilzGnWxuBYuoKAB67o80BjSsHoM-BSoiHk" />
+<meta property="fb:admins" content="1219819907" />
+
+<link rel="canonical" href="https://www.proxynova.com/proxy-server-list/" />
+
+<meta name="referrer" content="origin">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/css/app.css?id=994c81f58cd17d5f4b39">
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<meta name="keywords" content="proxy list, proxy servers 2017, proxy server list, open proxies, proxy servers, proxy servers by country, working proxy servers, proxy list 2020, fresh proxy list" />
+
+
+
+<!--
+<meta name="description" content="Indonesian Proxy List - This is a list of open proxy servers available for public use that will route your connection
+
+through a server that is located in India and thus make you appear to a target destination that you are connecting from India ">
+
+-->
+
+
+<script>
+function check_proxy(cell){
+    return;
+
+	var tr = $(cell).closest('tr');
+	console.log(tr.data('proxy-id'));
+	
+	if( $(cell).data('checking') ){
+		return;
+	}
+	
+	$(cell).data('checking', true);
+	
+	var ip = tr.find("td:eq(0)").text();
+	var port = tr.find("td:eq(1)").text().trim();
+	
+	ip = ip.replace(/document.*;/g, '').trim();
+	
+	$.getJSON('/api/proxy_check?ip=' + ip + '&port=' + port, function(data){
+		
+		if(data.status){
+			alert('OK!');
+		} else {
+			alert('Dead :(');
+		}
+		
+	});
+}
+
+</script>
+
+
+
+
+</head>
+<body>
+
+
+<div id="top_header">
+
+Your IP Address: <strong>202.3.249.140</strong>
+
+<span style="margin-left:30px;">&nbsp;</span>
+
+Your location: <span id="user_loc"></span>
+
+</div>
+
+
+<center>
+  <div id="wrapper" style="width:1050px;">
+
+	<!--
+		<div id="social_tab"> </div>
+	-->
+
+    <div id="header" style="margin:10px 0px; text-align:center;">
+
+		<div style="min-width:730px; min-height:90px;" id="_ta">
+
+			<div style="display:none; text-align:center;" id="_taf">
+
+				<div style="float:left;">
+				<a href="/proxy-software/" title="Download Internet Proxy Switcher" id="dl_ps_link"><img src="/logo.png" height="90"></a>
+				</div>
+
+				<div style="float:left; margin-left:8px;">
+
+				A great alternative to VPNs. Use this with our own free US-based proxy server:
+				<pre>https://www.proxynova.com/proxy.pac</pre>
+
+				</div>
+
+				<div class="clear"></div>
+
+			</div>
+
+			<script type="text/javascript"><!--
+			google_ad_client = "ca-pub-4660819739366379";
+			/* proxy_nova_top */
+			google_ad_slot = "4582654399";
+			google_ad_width = 728;
+			google_ad_height = 90;
+			//-->
+			</script>
+			<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+
+		</div>
+
+    </div>
+
+
+    <div id="main_container">
+      <div style="background-color:#4f85bb;">
+        <ul class="navbar" style="width:85%;">
+
+          <li><a href="/" title="Proxy List" class="icon-home">Home</a></li>
+
+          <li class="has-sub">
+
+		  <a href="/proxy-server-list/" title="Free Proxy Server List">Proxy Server List</a>
+
+            <div class="dropdown" style="width:580px;">
+
+			<div style="text-align:left;">
+				<h2>Proxy Servers by Country</h2>
+
+
+				<div style="margin:10px; color:white;">
+
+				(Number) of working proxies found for each country within the last 24 hours.
+
+				</div>
+
+
+			</div>
+
+			  <!-- menu begins -->
+
+			  <div class="col3 clearfix"><ul><li><div><img src="/assets/images/blank.gif" class="flag flag-ar" border="0"><a href="/proxy-server-list/country-ar/" title="Argentine Proxy List"> Argentina <span style='float:right;'>(137)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-bd" border="0"><a href="/proxy-server-list/country-bd/" title="Bangladeshi Proxy List"> Bangladesh <span style='float:right;'>(51)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-br" border="0"><a href="/proxy-server-list/country-br/" title="Brazilian Proxy List"> Brazil <span style='float:right;'>(485)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-cl" border="0"><a href="/proxy-server-list/country-cl/" title="Chilean Proxy List"> Chile <span style='float:right;'>(31)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-cn" border="0"><a href="/proxy-server-list/country-cn/" title="Chinese Proxy List"> China <span style='float:right;'>(832)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-co" border="0"><a href="/proxy-server-list/country-co/" title="Colombian Proxy List"> Colombia <span style='float:right;'>(63)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-fr" border="0"><a href="/proxy-server-list/country-fr/" title="French Proxy List"> France <span style='float:right;'>(28)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-de" border="0"><a href="/proxy-server-list/country-de/" title="German Proxy List"> Germany <span style='float:right;'>(68)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-hk" border="0"><a href="/proxy-server-list/country-hk/" title="Hong Kong Proxy List"> Hong Kong <span style='float:right;'>(45)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-in" border="0"><a href="/proxy-server-list/country-in/" title="Indian Proxy List"> India <span style='float:right;'>(149)</span></div></a></li></ul></div><div class="col3 clearfix"><ul><li><div><img src="/assets/images/blank.gif" class="flag flag-id" border="0"><a href="/proxy-server-list/country-id/" title="Indonesian Proxy List"> Indonesia <span style='float:right;'>(393)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-jp" border="0"><a href="/proxy-server-list/country-jp/" title="Japanese Proxy List"> Japan <span style='float:right;'>(27)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-ke" border="0"><a href="/proxy-server-list/country-ke/" title="Kenyan Proxy List"> Kenya <span style='float:right;'>(37)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-nl" border="0"><a href="/proxy-server-list/country-nl/" title="Dutch Proxy List"> Netherlands <span style='float:right;'>(26)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-pl" border="0"><a href="/proxy-server-list/country-pl/" title="Polish Proxy List"> Poland <span style='float:right;'>(28)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-ru" border="0"><a href="/proxy-server-list/country-ru/" title="Russian Proxy List"> Russia <span style='float:right;'>(151)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-rs" border="0"><a href="/proxy-server-list/country-rs/" title="Serbian Proxy List"> Serbia <span style='float:right;'>(24)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-kr" border="0"><a href="/proxy-server-list/country-kr/" title="Korean Proxy List"> South Korea <span style='float:right;'>(24)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-tw" border="0"><a href="/proxy-server-list/country-tw/" title="Taiwanese Proxy List"> Taiwan <span style='float:right;'>(212)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-th" border="0"><a href="/proxy-server-list/country-th/" title="Thai Proxy List"> Thailand <span style='float:right;'>(162)</span></div></a></li></ul></div><div class="col3 clearfix"><ul><li><div><img src="/assets/images/blank.gif" class="flag flag-ua" border="0"><a href="/proxy-server-list/country-ua/" title="Ukrainian Proxy List"> Ukraine <span style='float:right;'>(56)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-gb" border="0"><a href="/proxy-server-list/country-gb/" title="British Proxy List"> United Kingdom <span style='float:right;'>(25)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-us" border="0"><a href="/proxy-server-list/country-us/" title="American Proxy List"> United States <span style='float:right;'>(302)</span></div></a></li><li><div><img src="/assets/images/blank.gif" class="flag flag-ve" border="0"><a href="/proxy-server-list/country-ve/" title="Venezuelan Proxy List"> Venezuela <span style='float:right;'>(544)</span></div></a></li></ul></div>
+			  <!-- menu ends -->
+            </div>
+
+          </li>
+
+			<li><a href="/web-proxy-list/" title="Proxy List">Web Proxy List</a></li>
+			<!--
+			<li><a href="/online-proxy-checker/" title="Check Proxy Online">Online Proxy Checker</a></li>
+			-->
+			<li><a href="/proxy-articles/" title="Information about Proxy Servers">Proxy Articles</a></li>
+			<li><a href="/proxy-software/">Proxy Software</a></li>
+
+			<li> <a href="https://unblockvideos.com/" target="_blank" id="link_online_proxy">Online Proxy</a> </li>
+
+        </ul>
+      </div>
+
+	<div id="page_contents">
+	
+<header>
+	<h1>Free Proxy List - List of Open Proxy Servers</h1>
+</header>
+
+
+<p>
+<strong>Proxy Server List</strong> - this page provides and maintains the largest and the most up-to-date list of working proxy servers that are available for public use. Our powerful software checks over a million proxy servers daily, with most proxies tested at least once every 15 minutes, thus creating one of the most reliable proxy lists on the Internet - all for free.
+</p>
+ 
+<p>Any <strong>proxy server</strong> listed on this page can be used with a software application that supports the use of proxies such as your web browser. The most popular uses of proxies include hiding your real IP address, disguising your geographic location, and accessing blocked websites.
+</p>
+ 
+<p>
+This <strong>proxy list</strong> is updated once every 60 seconds from the data stored in our gigabyte-sized proxy database.
+The list can be filtered down by a number of attributes such as the port number of a proxy, country of origin of a proxy, and the level of anonymity of a proxy.
+</p>
+
+
+
+<div style="background:rgb(252, 248, 227); padding: .75rem 1.25rem; margin-bottom: 1rem; border: 1px solid transparent; border-radius: .25rem;">
+<strong>Note</strong>: If you do not know what any of these numbers mean, or how to use proxy servers in general, scroll to the bottom of this page.
+</div>
+
+
+
+<div style="height:25px;"></div>
+
+<center>
+
+	<div style="text-align:center;">
+
+		<select name="proxy_country" id="proxy_country" style="width:250px;">
+			<option selected="selected" value="">&lt; All Countries &gt;</option>
+			<option disabled="disabled">---</option>
+			
+						<option value="ad">Andorra (0)</option>
+						<option value="ae">United Arab Emirates (8)</option>
+						<option value="af">Afghanistan (0)</option>
+						<option value="ag">Antigua and Barbuda (0)</option>
+						<option value="ai">Anguilla (0)</option>
+						<option value="al">Albania (11)</option>
+						<option value="am">Armenia (3)</option>
+						<option value="an">Netherlands Antilles (0)</option>
+						<option value="ao">Angola (0)</option>
+						<option value="ap">Non-spec Asia Pas Location (0)</option>
+						<option value="ar">Argentina (137)</option>
+						<option value="as">American Samoa (0)</option>
+						<option value="at">Austria (12)</option>
+						<option value="au">Australia (5)</option>
+						<option value="aw">Aruba (0)</option>
+						<option value="ax">Åland Islands (0)</option>
+						<option value="az">Azerbaijan (2)</option>
+						<option value="ba">Bosnia and Herzegowina (1)</option>
+						<option value="bb">Barbados (0)</option>
+						<option value="bd">Bangladesh (51)</option>
+						<option value="be">Belgium (1)</option>
+						<option value="bf">Burkina Faso (1)</option>
+						<option value="bg">Bulgaria (20)</option>
+						<option value="bh">Bahrain (0)</option>
+						<option value="bi">Burundi (0)</option>
+						<option value="bj">Benin (0)</option>
+						<option value="bm">Bermuda (0)</option>
+						<option value="bn">Brunei Darussalam (0)</option>
+						<option value="bo">Bolivia (4)</option>
+						<option value="br">Brazil (485)</option>
+						<option value="bs">Bahamas (0)</option>
+						<option value="bt">Bhutan (0)</option>
+						<option value="bw">Botswana (0)</option>
+						<option value="by">Belarus (3)</option>
+						<option value="bz">Belize (0)</option>
+						<option value="ca">Canada (10)</option>
+						<option value="cd">DR Congo (2)</option>
+						<option value="cf">Central African Republic (0)</option>
+						<option value="cg">Congo (0)</option>
+						<option value="ch">Switzerland (5)</option>
+						<option value="ci">Cote D&#039;ivoire (0)</option>
+						<option value="ck">Cook Islands (1)</option>
+						<option value="cl">Chile (31)</option>
+						<option value="cm">Cameroon (1)</option>
+						<option value="cn">China (832)</option>
+						<option value="co">Colombia (63)</option>
+						<option value="cr">Costa Rica (0)</option>
+						<option value="cu">Cuba (0)</option>
+						<option value="cv">Cape Verde (0)</option>
+						<option value="cy">Cyprus (1)</option>
+						<option value="cz">Czech Republic (18)</option>
+						<option value="de">Germany (68)</option>
+						<option value="dj">Djibouti (0)</option>
+						<option value="dk">Denmark (3)</option>
+						<option value="dm">Dominica (0)</option>
+						<option value="do">Dominican Republic (1)</option>
+						<option value="dz">Algeria (0)</option>
+						<option value="ec">Ecuador (12)</option>
+						<option value="ee">Estonia (1)</option>
+						<option value="eg">Egypt (6)</option>
+						<option value="er">Eritrea (0)</option>
+						<option value="es">Spain (8)</option>
+						<option value="et">Ethiopia (0)</option>
+						<option value="eu">European Union (19)</option>
+						<option value="fi">Finland (1)</option>
+						<option value="fj">Fiji (0)</option>
+						<option value="fm">Micronesia Federated States of (0)</option>
+						<option value="fo">Faroe Islands (0)</option>
+						<option value="fr">France (28)</option>
+						<option value="ga">Gabon (0)</option>
+						<option value="gb">United Kingdom (25)</option>
+						<option value="gd">Grenada (0)</option>
+						<option value="ge">Georgia (2)</option>
+						<option value="gf">French Guiana (0)</option>
+						<option value="gg">Guernsey (0)</option>
+						<option value="gh">Ghana (3)</option>
+						<option value="gi">Gibraltar (0)</option>
+						<option value="gl">Greenland (0)</option>
+						<option value="gm">Gambia (0)</option>
+						<option value="gn">Guinea (0)</option>
+						<option value="gp">Guadeloupe (0)</option>
+						<option value="gq">Equatorial Guinea (0)</option>
+						<option value="gr">Greece (0)</option>
+						<option value="gt">Guatemala (0)</option>
+						<option value="gu">Guam (0)</option>
+						<option value="gw">Guinea-bissau (0)</option>
+						<option value="gy">Guyana (0)</option>
+						<option value="hk">Hong Kong (45)</option>
+						<option value="hn">Honduras (0)</option>
+						<option value="hr">Croatia (1)</option>
+						<option value="ht">Haiti (0)</option>
+						<option value="hu">Hungary (6)</option>
+						<option value="id">Indonesia (393)</option>
+						<option value="ie">Ireland (0)</option>
+						<option value="il">Israel (6)</option>
+						<option value="im">Isle of Man (0)</option>
+						<option value="in">India (149)</option>
+						<option value="io">British Indian Ocean Territory (0)</option>
+						<option value="iq">Iraq (10)</option>
+						<option value="ir">Iran (1)</option>
+						<option value="is">Iceland (2)</option>
+						<option value="it">Italy (9)</option>
+						<option value="je">Jersey (0)</option>
+						<option value="jm">Jamaica (2)</option>
+						<option value="jo">Jordan (0)</option>
+						<option value="jp">Japan (27)</option>
+						<option value="ke">Kenya (37)</option>
+						<option value="kg">Kyrgyzstan (0)</option>
+						<option value="kh">Cambodia (8)</option>
+						<option value="ki">Kiribati (0)</option>
+						<option value="kn">Saint Kitts and Nevis (0)</option>
+						<option value="kp">Korea Democratic People&#039;s Republic of (0)</option>
+						<option value="kr">South Korea (24)</option>
+						<option value="kw">Kuwait (0)</option>
+						<option value="ky">Cayman Islands (0)</option>
+						<option value="kz">Kazakhstan (5)</option>
+						<option value="la">Lao People&#039;s Democratic Republic (0)</option>
+						<option value="lb">Lebanon (4)</option>
+						<option value="lc">Saint Lucia (0)</option>
+						<option value="li">Liechtenstein (0)</option>
+						<option value="lk">Sri Lanka (0)</option>
+						<option value="lr">Liberia (1)</option>
+						<option value="ls">Lesotho (0)</option>
+						<option value="lt">Lithuania (1)</option>
+						<option value="lu">Luxembourg (1)</option>
+						<option value="lv">Latvia (8)</option>
+						<option value="ly">Libyan Arab Jamahiriya (0)</option>
+						<option value="ma">Morocco (19)</option>
+						<option value="mc">Monaco (0)</option>
+						<option value="md">Moldova (14)</option>
+						<option value="me">Montenegro (0)</option>
+						<option value="mf">Saint Martin (0)</option>
+						<option value="mg">Madagascar (2)</option>
+						<option value="mh">Marshall Islands (0)</option>
+						<option value="mk">Macedonia (0)</option>
+						<option value="ml">Mali (0)</option>
+						<option value="mm">Myanmar (2)</option>
+						<option value="mn">Mongolia (2)</option>
+						<option value="mo">Macau (0)</option>
+						<option value="mp">Northern Mariana Islands (0)</option>
+						<option value="mr">Mauritania (0)</option>
+						<option value="ms">Montserrat (0)</option>
+						<option value="mt">Malta (0)</option>
+						<option value="mu">Mauritius (0)</option>
+						<option value="mv">Maldives (1)</option>
+						<option value="mw">Malawi (0)</option>
+						<option value="mx">Mexico (18)</option>
+						<option value="my">Malaysia (15)</option>
+						<option value="mz">Mozambique (10)</option>
+						<option value="na">Namibia (0)</option>
+						<option value="nc">New Caledonia (0)</option>
+						<option value="ne">Niger (0)</option>
+						<option value="nf">Norfolk Island (0)</option>
+						<option value="ng">Nigeria (12)</option>
+						<option value="ni">Nicaragua (0)</option>
+						<option value="nl">Netherlands (26)</option>
+						<option value="no">Norway (4)</option>
+						<option value="np">Nepal (10)</option>
+						<option value="nr">Nauru (0)</option>
+						<option value="nu">Niue (0)</option>
+						<option value="nz">New Zealand (3)</option>
+						<option value="om">Oman (0)</option>
+						<option value="pa">Panama (0)</option>
+						<option value="pe">Peru (7)</option>
+						<option value="pf">French Polynesia (0)</option>
+						<option value="pg">Papua New Guinea (0)</option>
+						<option value="ph">Philippines (15)</option>
+						<option value="pk">Pakistan (9)</option>
+						<option value="pl">Poland (28)</option>
+						<option value="pm">St. Pierre and Miquelon (0)</option>
+						<option value="pr">Puerto Rico (2)</option>
+						<option value="ps">Palestinian Territories (0)</option>
+						<option value="pt">Portugal (4)</option>
+						<option value="pw">Palau (0)</option>
+						<option value="py">Paraguay (5)</option>
+						<option value="qa">Qatar (0)</option>
+						<option value="re">Reunion (0)</option>
+						<option value="ro">Romania (14)</option>
+						<option value="rs">Serbia (24)</option>
+						<option value="ru">Russia (151)</option>
+						<option value="rw">Rwanda (0)</option>
+						<option value="sa">Saudi Arabia (3)</option>
+						<option value="sb">Solomon Islands (0)</option>
+						<option value="sc">Seychelles (0)</option>
+						<option value="sd">Sudan (0)</option>
+						<option value="se">Sweden (9)</option>
+						<option value="sg">Singapore (3)</option>
+						<option value="si">Slovenia (1)</option>
+						<option value="sk">Slovakia (4)</option>
+						<option value="sl">Sierra Leone (0)</option>
+						<option value="sm">San Marino (0)</option>
+						<option value="sn">Senegal (0)</option>
+						<option value="so">Somalia (0)</option>
+						<option value="sr">Suriname (7)</option>
+						<option value="sv">El Salvador (0)</option>
+						<option value="sy">Syrian Arab Republic (0)</option>
+						<option value="sz">Swaziland (0)</option>
+						<option value="tc">Turks and Caicos Islands (0)</option>
+						<option value="td">Chad (0)</option>
+						<option value="tg">Togo (0)</option>
+						<option value="th">Thailand (162)</option>
+						<option value="tj">Tajikistan (0)</option>
+						<option value="tk">Tokelau (0)</option>
+						<option value="tl">Timor-leste (0)</option>
+						<option value="tm">Turkmenistan (0)</option>
+						<option value="tn">Tunisia (1)</option>
+						<option value="to">Tonga (0)</option>
+						<option value="tr">Turkey (15)</option>
+						<option value="tt">Trinidad and Tobago (0)</option>
+						<option value="tv">Tuvalu (0)</option>
+						<option value="tw">Taiwan (212)</option>
+						<option value="tz">Tanzania (14)</option>
+						<option value="ua">Ukraine (56)</option>
+						<option value="ug">Uganda (0)</option>
+						<option value="us">United States (302)</option>
+						<option value="uy">Uruguay (4)</option>
+						<option value="uz">Uzbekistan (0)</option>
+						<option value="va">Holy See (VATICAN City State) (0)</option>
+						<option value="vc">Saint Vincent and The Grenadines (0)</option>
+						<option value="ve">Venezuela (544)</option>
+						<option value="vg">Virgin Islands (BRITISH) (0)</option>
+						<option value="vi">Virgin Islands (U.S.) (0)</option>
+						<option value="vn">Vietnam (19)</option>
+						<option value="vu">Vanuatu (0)</option>
+						<option value="wf">Wallis and Futuna Islands (0)</option>
+						<option value="ws">Samoa (0)</option>
+						<option value="ye">Yemen (1)</option>
+						<option value="za">South Africa (16)</option>
+						<option value="zm">Zambia (2)</option>
+						<option value="zw">Zimbabwe (1)</option>
+						<option value="zz">Reserved (0)</option>
+						<option value="aq">Antarctica (0)</option>
+						<option value="bq">Bonaire, Sint Eustatius and Saba (0)</option>
+						<option value="bv">Bouvet Island (0)</option>
+						<option value="cx">Christmas Island (0)</option>
+						<option value="cc">Cocos (Keeling) Islands (0)</option>
+						<option value="km">Comoros (0)</option>
+						<option value="cw">Curaçao (0)</option>
+						<option value="fk">Falkland Islands (Malvinas) (0)</option>
+						<option value="tf">French Southern Territories (0)</option>
+						<option value="hm">Heard Island and McDonald Islands (0)</option>
+						<option value="mq">Martinique (0)</option>
+						<option value="yt">Mayotte (0)</option>
+						<option value="pn">Pitcairn (0)</option>
+						<option value="bl">Saint Barthélemy (0)</option>
+						<option value="sh">Saint Helena, Ascension and Tristan da Cunha (0)</option>
+						<option value="st">Sao Tome and Principe (0)</option>
+						<option value="sx">Sint Maarten (Dutch part) (0)</option>
+						<option value="gs">South Georgia and the South Sandwich Islands (0)</option>
+						<option value="ss">South Sudan (0)</option>
+						<option value="sj">Svalbard and Jan Mayen (0)</option>
+						<option value="um">United States Minor Outlying Islands (0)</option>
+						<option value="eh">Western Sahara (0)</option>
+						
+		</select>
+
+		&nbsp;
+
+		<select name="lst_proxy_level" id="lst_proxy_level">
+			<option value="all" selected="selected">&lt; All Proxies &gt;</option>
+			<option disabled="disabled">---</option>
+			<option value="elite">Elite/High Anonymous Proxies</option>
+			<option value="anonymous">Anonymous Proxies</option>
+		</select>
+
+	</div>
+
+<br>
+<br>
+
+	<div>
+		<center>
+	  
+			<div class="728x15">
+		  
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- proxy_nova_list -->
+			<ins class="adsbygoogle"
+				 style="display:inline-block;width:728px;height:15px"
+				 data-ad-client="ca-pub-4660819739366379"
+				 data-ad-slot="5607768202"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+
+			</div>
+			
+		</center>
+	</div>
+
+  <br />
+  <div id="bla" style="width:950px;">
+    <table width="950" class="table" id="tbl_proxy_list">
+      <thead>
+        <tr>
+          <th>Proxy IP</th>
+          <th>Proxy Port</th>
+          <th>Last Check</th>
+          <th nowrap="nowrap"><span title="Proxy Speed in bytes per second">Proxy Speed</span></th>
+		  <th>Uptime</th>
+          <th><span title="The location of that particular proxy.">Proxy Country</span></th>
+          <th>Anonymity</th>
+		  <th><span style="color:#cc181e; border-bottom: 1px dotted #000; text-decoration: none; cursor:pointer;" title="YouTube Proxy Test - Number of times we have been able to establish a connection to YouTube using this particular proxy.">YouTube</span></th>
+        </tr>
+      </thead>
+      <tbody>
+	  
+	        <tr data-proxy-id="1546316">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('200.89.178.208');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-3128/" title="Port 3128 proxies">3128</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:31:04Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="8" title="539"></div>
+			<small>539 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">75%</span>
+								<span> (4)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-ar" alt="ar" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-ar/" title="Proxies from Argentina">Argentina			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_anonymous" style="font-weight:bold; font-size:10px;">Anonymous</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1546330">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('200.89.178.210');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:31:01Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="17" title="916"></div>
+			<small>916 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">86%</span>
+								<span> (7)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-ar" alt="ar" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-ar/" title="Proxies from Argentina">Argentina			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_anonymous" style="font-weight:bold; font-size:10px;">Anonymous</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1546329">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('200.89.178.210');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-3128/" title="Port 3128 proxies">3128</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:58Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="8" title="556"></div>
+			<small>556 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">100%</span>
+								<span> (6)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-ar" alt="ar" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-ar/" title="Proxies from Argentina">Argentina			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_anonymous" style="font-weight:bold; font-size:10px;">Anonymous</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1559401">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('200.89.178.213');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-3128/" title="Port 3128 proxies">3128</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:55Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="7" title="510"></div>
+			<small>510 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">88%</span>
+								<span> (8)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/flag_unknown.png" class="flag flag-" alt="" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-/" title="Proxies from ">			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_anonymous" style="font-weight:bold; font-size:10px;">Anonymous</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1558556">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('200.89.178.218');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-3128/" title="Port 3128 proxies">3128</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:46Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="12" title="701"></div>
+			<small>701 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">100%</span>
+								<span> (11)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/flag_unknown.png" class="flag flag-" alt="" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-/" title="Proxies from ">			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_anonymous" style="font-weight:bold; font-size:10px;">Anonymous</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1269523">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('200.155.36.185');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-3128/" title="Port 3128 proxies">3128</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:37Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="0" title="0"></div>
+			<small>0 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">0%</span>
+								<span> (6)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-br" alt="br" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-br/" title="Proxies from Brazil">Brazil							<span class="proxy-city"> - Londrina </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1545190">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('201.182.241.99');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  9991
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:31Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="57" title="2504"></div>
+			<small>2504 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">25%</span>
+								<span> (8)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-pa" alt="pa" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-pa/" title="Proxies from Panama">Panama							<span class="proxy-city"> - Bella Vista </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1449599">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('201.18.88.150');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:28Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="75" title="3230"></div>
+			<small>3230 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">23%</span>
+								<span> (9)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-br" alt="br" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-br/" title="Proxies from Brazil">Brazil			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1553307">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('203.19.88.59');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-80/" title="Port 80 proxies">80</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:28Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="14" title="782"></div>
+			<small>782 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">100%</span>
+								<span> (6)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/flag_unknown.png" class="flag flag-" alt="" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-/" title="Proxies from ">			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_anonymous" style="font-weight:bold; font-size:10px;">Anonymous</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1546606">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('202.129.184.227');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-80/" title="Port 80 proxies">80</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:25Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="83" title="3543"></div>
+			<small>3543 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">34%</span>
+								<span> (9)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-id" alt="id" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-id/" title="Proxies from Indonesia">Indonesia							<span class="proxy-city"> - Jakarta </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1348323">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('209.132.146.44');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-3128/" title="Port 3128 proxies">3128</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:19Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="1" title="269"></div>
+			<small>269 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">100%</span>
+								<span> (2)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-us" alt="us" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-us/" title="Proxies from United States">United States							<span class="proxy-city"> - Hayward </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1503674">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('202.72.233.18');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:10Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="0" title="0"></div>
+			<small>0 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">0%</span>
+								<span> (5)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-bd" alt="bd" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-bd/" title="Proxies from Bangladesh">Bangladesh							<span class="proxy-city"> - Dhaka </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+        <tr><td colspan=10>	
+	<center>
+		<div class="ad728x90">
+		
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- proxy_nova_list_banner -->
+					<ins class="adsbygoogle"
+						 style="display:inline-block;width:728px;height:90px"
+						 data-ad-client="ca-pub-4660819739366379"
+						 data-ad-slot="4986885628"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+
+		</div>
+	</center>
+		
+		</td></tr>        <tr data-proxy-id="1520141">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('202.21.105.115');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-80/" title="Port 80 proxies">80</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:01Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="96" title="4041"></div>
+			<small>4041 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">28%</span>
+								<span> (11)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-mn" alt="mn" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-mn/" title="Proxies from Mongolia">Mongolia			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="61976">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('202.55.169.141');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-3128/" title="Port 3128 proxies">3128</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:30:01Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="100" title="4828"></div>
+			<small>4828 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">25%</span>
+								<span> (8)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-id" alt="id" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-id/" title="Proxies from Indonesia">Indonesia							<span class="proxy-city"> - Jakarta </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1487035">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('202.62.73.225');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  83
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:58Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="100" title="4846"></div>
+			<small>4846 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#e6ac00;">50%</span>
+								<span> (4)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-in" alt="in" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-in/" title="Proxies from India">India							<span class="proxy-city"> - Siddipet </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1058350">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('202.142.158.114');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:55Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="87" title="3715"></div>
+			<small>3715 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">100%</span>
+								<span> (3)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-pk" alt="pk" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-pk/" title="Proxies from Pakistan">Pakistan							<span class="proxy-city"> - Karachi </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1504590">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('203.150.128.206');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:55Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="98" title="4158"></div>
+			<small>4158 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">20%</span>
+								<span> (10)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-th" alt="th" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-th/" title="Proxies from Thailand">Thailand			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1546335">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('212.175.167.137');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-80/" title="Port 80 proxies">80</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:49Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="71" title="3066"></div>
+			<small>3066 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">72%</span>
+								<span> (7)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-tr" alt="tr" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-tr/" title="Proxies from Turkey">Turkey							<span class="proxy-city"> - Deliklikaya </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_anonymous" style="font-weight:bold; font-size:10px;">Anonymous</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1305426">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('223.16.229.241');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:49Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="14" title="790"></div>
+			<small>790 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#e6ac00;">50%</span>
+								<span> (4)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-hk" alt="hk" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-hk/" title="Proxies from Hong Kong">Hong Kong							<span class="proxy-city"> - Central District </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_elite" style="font-weight:bold; font-size:10px;">Elite</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1557282">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('223.199.22.23');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  9999
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:46Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="16" title="840"></div>
+			<small>840 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">23%</span>
+								<span> (9)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/flag_unknown.png" class="flag flag-" alt="" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-/" title="Proxies from ">			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_elite" style="font-weight:bold; font-size:10px;">Elite</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1557214">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('223.199.25.160');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  9999
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:43Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="15" title="829"></div>
+			<small>829 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">15%</span>
+								<span> (7)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/flag_unknown.png" class="flag flag-" alt="" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-/" title="Proxies from ">			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_elite" style="font-weight:bold; font-size:10px;">Elite</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1540521">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('202.62.103.206');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:43Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="100" title="4590"></div>
+			<small>4590 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">15%</span>
+								<span> (7)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-la" alt="la" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-la/" title="Proxies from Lao People's Democratic Republic">Lao People's Democratic Republic							<span class="proxy-city"> - Vientiane </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1546847">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('212.8.104.86');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-3128/" title="Port 3128 proxies">3128</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:34Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="87" title="3689"></div>
+			<small>3689 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">29%</span>
+								<span> (7)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-es" alt="es" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-es/" title="Proxies from Spain">Spain			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="890987">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('27.191.234.69');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  9999
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:21Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="67" title="2903"></div>
+			<small>2903 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#e6ac00;">50%</span>
+								<span> (4)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-cn" alt="cn" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-cn/" title="Proxies from China">China							<span class="proxy-city"> - Hebei </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1520116">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('39.108.123.4');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-3128/" title="Port 3128 proxies">3128</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:15Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="26" title="1243"></div>
+			<small>1243 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">100%</span>
+								<span> (5)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-cn" alt="cn" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-cn/" title="Proxies from China">China							<span class="proxy-city"> - Hangzhou </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1346333">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('41.190.33.162');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:12Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="26" title="1240"></div>
+			<small>1240 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">72%</span>
+								<span> (7)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-zw" alt="zw" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-zw/" title="Proxies from Zimbabwe">Zimbabwe			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_elite" style="font-weight:bold; font-size:10px;">Elite</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1274833">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('36.67.206.187');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:09Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="98" title="4157"></div>
+			<small>4157 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#e6ac00;">40%</span>
+								<span> (5)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-id" alt="id" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-id/" title="Proxies from Indonesia">Indonesia			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1489984">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('41.73.15.246');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-80/" title="Port 80 proxies">80</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:09Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="18" title="932"></div>
+			<small>932 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">100%</span>
+								<span> (11)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-ng" alt="ng" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-ng/" title="Proxies from Nigeria">Nigeria							<span class="proxy-city"> - Suleja </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1553438">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('41.180.69.238');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:09Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="21" title="1045"></div>
+			<small>1045 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#009900;">100%</span>
+								<span> (7)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/flag_unknown.png" class="flag flag-" alt="" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-/" title="Proxies from ">			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1553328">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('36.89.99.93');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:06Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="85" title="3604"></div>
+			<small>3604 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">13%</span>
+								<span> (8)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/flag_unknown.png" class="flag flag-" alt="" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-/" title="Proxies from ">			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1544318">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('36.92.58.246');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:03Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="100" title="5007"></div>
+			<small>5007 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#CC0000;">20%</span>
+								<span> (5)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-id" alt="id" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-id/" title="Proxies from Indonesia">Indonesia			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1524734">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('41.65.89.54');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:29:00Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="64" title="2779"></div>
+			<small>2779 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#e6ac00;">67%</span>
+								<span> (15)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-eg" alt="eg" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-eg/" title="Proxies from Egypt">Egypt			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1539239">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('43.245.216.129');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:28:57Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="64" title="2762"></div>
+			<small>2762 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#e6ac00;">40%</span>
+								<span> (10)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-kh" alt="kh" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-kh/" title="Proxies from Cambodia">Cambodia			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_elite" style="font-weight:bold; font-size:10px;">Elite</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1529310">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('45.184.68.32');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:28:57Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="78" title="3348"></div>
+			<small>3348 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#e6ac00;">43%</span>
+								<span> (7)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-za" alt="za" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-za/" title="Proxies from South Africa">South Africa							<span class="proxy-city"> - Johannesburg </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+                <tr data-proxy-id="1529310">
+
+		  		  
+		  <td align="left" onclick="javascript:check_proxy(this)">
+			<abbr title=""><script>document.write('45.184.68.32');</script> </abbr>
+		</td>
+          <td align="left">
+		  		  <a href="/proxy-server-list/port-8080/" title="Port 8080 proxies">8080</a>
+		  		  </td>
+		  
+		  		  
+          <td align="left"> <time class="icon icon-check timeago" datetime="2020-02-04 00:28:57Z"></time> </td>
+          <td align="left">	  
+			<div class="progress-bar" data-value="78" title="3348"></div>
+			<small>3348 ms</small>
+		  </td>
+
+		  <td style="text-align:center !important;">
+									<span style="color:#e6ac00;">43%</span>
+								<span> (7)</span>
+		</td>
+		<td align="left">
+		  <img src="/assets/images/blank.gif" class="flag flag-za" alt="za" style="vertical-align: middle;" />
+
+		  <a href="/proxy-server-list/country-za/" title="Proxies from South Africa">South Africa							<span class="proxy-city"> - Johannesburg </span> 
+			
+		</a>
+		</td>
+		   
+		<td align="left">		  
+			<span class="proxy_transparent" style="font-weight:bold; font-size:10px;">Transparent</span>
+		</td>
+		<td> <span>-</span> </td>
+        </tr>
+		
+        		
+				
+      </tbody>
+      <tr>
+        <th colspan="10">&nbsp;</th>
+      </tr>
+    </table>
+	
+    </center>
+    
+	<!--- ads on the bottom --->
+	
+    <center>
+		<div class="728x15">
+		
+			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<!-- proxy_nova_list_bottom -->
+			<ins class="adsbygoogle"
+				 style="display:inline-block;width:728px;height:15px"
+				 data-ad-client="ca-pub-4660819739366379"
+				 data-ad-slot="7095001220"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+
+		</div>
+    </center>
+	
+	<!--- ads end --->
+	
+    <br />
+	
+
+	<h3>Proxy Anonymity Levels Explained</h3>
+	
+	<p>
+	A more detailed explanation about the specifics can be found on our 
+	<a href="/proxy-articles/proxy-anonymity-levels-explained/">proxy levels explained</a>
+	page, but the basic behavior of each proxy level goes like this:
+	</p>
+	
+	<p>
+	
+	<ul>
+	
+	<li>
+	<span class="proxy_transparent"><strong>Transparent</strong></span> - target server knows your IP address and it knows that you are connecting via a proxy server.
+	</li>
+	
+	<li>
+	<span class="proxy_anonymous"><strong>Anonymous</strong></span> - target server does not know your IP address, but it knows that you're using a proxy.
+	</li>
+	
+	<li>
+	<span class="proxy_elite"><strong>Elite</strong></span> - target server does not know your IP address, or
+	that the request is relayed through a proxy server.
+	</li>
+	
+	</ul>
+	
+	</p>
+	
+	
+	<h3>How to use Proxy Servers?</h3>
+	
+	<p>
+	Almost any application, such as your own web-browser, can be configured to route your connections through a <strong>proxy server</strong> for reasons of anonimity or performance.
+	
+	Configuring your browser to use a proxy server is quick and easy, and the instructions for doing that are described in our <a href="/proxy-articles/">articles</a> section.
+	</p>
+	
+	
+	<!--
+	<img src="https://www.mozilla.org/media/img/styleguide/identity/firefox/usage-standard.dd994d6216e9.png" width="150">
+	
+	<img src="https://vignette2.wikia.nocookie.net/logopedia/images/2/2f/Internet_Explorer_10_logo.svg/revision/latest?cb=20150411110707" width="150">
+	
+	<img src="https://vignette1.wikia.nocookie.net/logopedia/images/9/96/Zzc.png/revision/latest?cb=20151017150635">
+	-->
+
+
+<p>
+
+However, the recommended alternative to doing all those steps anytime you wish to use a different proxy, is to use our homemade <strong>proxy switcher</strong>
+that can simplify the whole process to just a few mouse clicks. Our Nova Proxy Switcher can be downloaded from our 
+<a href="/proxy-software/">proxy software</a> page.
+
+</p>
+
+<center>
+	<a href="/files/ie_proxy_switcher_3.2.zip" title="Click here to download Internet Proxy Switcher!"><img src="/assets/images/software/nova-proxy-switcher-server.png"></a>
+</center>
+
+
+	</div>
+
+    </div>
+	<div id="footer">
+		<div style="float:left;">
+			<a href="https://www.proxynova.com" title="Proxy Server List">&copy; 2011-2020 ProxyNova.com</a>
+		</div>
+
+		<div style="float:right;">
+			<ul class="list-inline" style="margin:0;">
+				<li> <a href="https://unblockvideos.com/" title="Unblock YouTube and other Videos Sites!" target="_blank">Unblock YouTube using Web Proxy</a> </li>
+				<li> <a href="https://www.php-proxy.com/" title="The most popular online Proxy Script" target="_blank">PHP-Proxy</a> </li>
+
+				<li> <a href="http://country.proxynova.com/">IP to Country online API</a> </li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+</div>
+</center>
+
+
+
+<script type="text/javascript">
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3776441-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script src="/js/vendor.js?id=4ad92909bc34a57e8aff"></script>
+
+<script type="text/javascript">
+
+// adsense and analytics
+window.google_analytics_uacct = "UA-3776441-4";
+
+window.google_analytics_uacct = "UA-3776441-8";
+
+$(document).ready(function(){
+
+	$.getJSON('https://api.unblockvideos.com/geoip2?callback=?', [], function(data, status, xhr){
+
+		console.log(data);
+
+		var html = data['city'] + ', ' + data['country_name'];
+		html += ' <img src="/assets/images/blank.gif" class="flag flag-' + data['country_code'].toLowerCase() + '" style="vertical-align:middle;">';
+
+		$("#user_loc").html(html);
+	});
+
+	$(".progress-bar").pbar();
+
+	// check to see if adblock is on
+	var test = document.createElement('div');
+	test.innerHTML = '&nbsp;';
+	test.className = 'adsbox';
+	document.body.appendChild(test);
+
+	window.setTimeout(function(){
+
+		if(test.offsetHeight === 0){
+			document.body.classList.add('adblock');
+
+			$("#_taf").show();
+
+			//alert('blocked!');
+		}
+
+		test.remove();
+
+	}, 500);
+
+	//alert(ch);
+
+	$("html").removeClass("no-js");
+
+	/*
+	 suffixAgo: "ago",
+suffixFromNow: "from now",
+inPast: 'any moment now',
+seconds: "less than a minute",
+minute: "about a minute",
+minutes: "%d minutes",
+hour: "about an hour",
+hours: "about %d hours",
+day: "a day",
+days: "%d days",
+month: "about a month",
+months: "%d months",
+year: "about a year",
+years: "%d years",
+*/
+
+
+	jQuery.timeago.settings.refreshMillis = 60 * 1000;
+
+	jQuery.timeago.settings.strings.seconds = "%d sec";
+
+	jQuery.timeago.settings.strings.minute = "1 min";
+	jQuery.timeago.settings.strings.minutes = "%d min";
+
+	jQuery.timeago.settings.strings.hour = "1 hour";
+	jQuery.timeago.settings.strings.hours = "%d hours";
+
+	console.log(jQuery.timeago.settings);
+
+	jQuery(".timeago").timeago();
+
+
+});
+
+function rand(min, max){
+	return Math.floor(Math.random()*(max-min+1)+min);
+}
+
+</script>
+
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50cf8cfd69116d5a"></script>
+
+</body>
+</html>
