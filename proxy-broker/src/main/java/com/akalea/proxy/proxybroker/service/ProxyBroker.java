@@ -48,8 +48,8 @@ public class ProxyBroker {
         this.fetcher = fetcher;
     }
 
-    public void init() {
-        this.fetcher.init();
+    public void setup() {
+        this.fetcher.start();
     }
 
     public Proxy randomProxy() {

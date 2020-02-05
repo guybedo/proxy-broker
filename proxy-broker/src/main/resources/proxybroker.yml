@@ -39,8 +39,8 @@ proxy:
       pageUrl: http://free-proxy.cz/en/proxylist/main/{page}
       protocol: HTTP,HTTPS 
       format: free-proxy.cz
-    - url: www.freeproxylists.net
-      pageUrl: www.freeproxylists.net/?page={page}
+    - url: http://www.freeproxylists.net
+      pageUrl: http://www.freeproxylists.net/?page={page}
       protocol: HTTP,HTTPS 
       format: freeproxylists.net
   proxies:
