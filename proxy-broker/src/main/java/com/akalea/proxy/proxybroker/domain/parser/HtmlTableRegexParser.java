@@ -10,12 +10,12 @@ import com.google.common.collect.Lists;
 
 public class HtmlTableRegexParser implements ProxyDataParser {
 
+    public static String format = "html";
+
     private Pattern pattern =
         Pattern.compile(
             "<td[^<>]*>([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})</td>"
                 + "<td[^<>]*>([1-9][0-9]{1,4})</td>");
-
-    private String parserId = "html";
 
     @Override
     public List<Proxy> parse(String content) {
@@ -28,10 +28,6 @@ public class HtmlTableRegexParser implements ProxyDataParser {
         }
         return proxies;
 
-    }
-
-    public String getParserId() {
-        return parserId;
     }
 
 }

@@ -13,12 +13,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.akalea.proxy.proxybroker.domain.Proxy;
-import com.akalea.proxy.proxybroker.domain.ProxyProvider;
 import com.akalea.proxy.proxybroker.domain.ProxyQuery;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyConfiguration;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties;
 import com.akalea.proxy.proxybroker.utils.ThreadUtils;
-import com.google.common.collect.Lists;
 
 public class ProxyBroker {
 
@@ -26,23 +24,32 @@ public class ProxyBroker {
 
     private ProxyProperties properties;
 
-    private List<ProxyProvider> providers = Collections.synchronizedList(Lists.newArrayList());
-    private Map<String, Proxy>  proxies   =
-        Collections.synchronizedMap(new HashMap<String, Proxy>());
+    private ProxyChecker checker;
+    private ProxyFetcher fetcher;
 
-    private ProxyChecker            proxyChecker;
-    private ProxyProviderRepository providerRepository;
+    private Map<String, Proxy> proxies =
+        Collections.synchronizedMap(new HashMap<String, Proxy>());
 
     private Random rand = new Random();
 
     public ProxyBroker() {
         this.properties = ProxyConfiguration.proxyProperties();
-        this.proxyChecker = new ProxyChecker(this);
-        this.providerRepository = new ProxyProviderRepository(this, this.proxyChecker);
+        this.checker = new ProxyChecker(this);
+        this.fetcher = new ProxyFetcher(this, this.checker);
+    }
+
+    public ProxyBroker(
+        ProxyProperties properties,
+        ProxyFetcher fetcher,
+        ProxyChecker checker) {
+        super();
+        this.properties = properties;
+        this.checker = checker;
+        this.fetcher = fetcher;
     }
 
     public void init() {
-        this.providerRepository.init();
+        this.fetcher.init();
     }
 
     public Proxy randomProxy() {

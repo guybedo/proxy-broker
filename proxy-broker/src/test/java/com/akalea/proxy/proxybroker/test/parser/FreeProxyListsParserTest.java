@@ -1,4 +1,4 @@
-package com.akalea.proxy.proxybroker;
+package com.akalea.proxy.proxybroker.test.parser;
 
 import java.io.File;
 import java.io.IOException;

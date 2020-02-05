@@ -14,11 +14,11 @@ import com.akalea.proxy.proxybroker.domain.Proxy;
 
 public class HtmlTableJsoupParser implements ProxyDataParser {
 
+    public static String format = "html_tags";
+
     private Pattern ipPattern   =
         Pattern.compile("[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}");
     private Pattern portPattern = Pattern.compile("[1-9][0-9]{1,4}");
-
-    private String parserId = "html";
 
     private String tableRowSelector;
 
@@ -53,10 +53,6 @@ public class HtmlTableJsoupParser implements ProxyDataParser {
             })
             .filter(p -> p != null)
             .collect(Collectors.toList());
-    }
-
-    public String getParserId() {
-        return parserId;
     }
 
 }

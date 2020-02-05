@@ -8,6 +8,8 @@ import com.google.common.collect.Lists;
 public class ProxyProvider {
 
     private String url;
+    private String pageUrl;
+
     private String format;
 
     private List<String> protocols = Lists.newArrayList();
@@ -82,6 +84,15 @@ public class ProxyProvider {
 
     public ProxyProvider setFormat(String format) {
         this.format = format;
+        return this;
+    }
+
+    public String getPageUrl() {
+        return pageUrl;
+    }
+
+    public ProxyProvider setPageUrl(String pageUrl) {
+        this.pageUrl = pageUrl;
         return this;
     }
 

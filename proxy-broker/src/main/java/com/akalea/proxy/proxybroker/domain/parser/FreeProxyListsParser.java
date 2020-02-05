@@ -14,12 +14,12 @@ public class FreeProxyListsParser implements ProxyDataParser {
 
     private final static Logger logger = LoggerFactory.getLogger(FreeProxyListsParser.class);
 
+    public static String format = "freeproxylists.net";
+
     private Pattern pattern      =
         Pattern.compile("<script type=\"text/javascript\">IPDecode\\(\"(.*)\"\\)</script>");
     private Pattern ipRefPattern =
         Pattern.compile("<a href=\"http://www.freeproxylists.net/.*html\">([0-9.]*)</a>");
-
-    private String parserId = "freeproxylists.net";
 
     @Override
     public List<Proxy> parse(String content) {
@@ -55,10 +55,6 @@ public class FreeProxyListsParser implements ProxyDataParser {
                 String.format("Could not decoded ip address from encoded form %s", encoded));
             return "n/a";
         }
-    }
-
-    public String getParserId() {
-        return parserId;
     }
 
 }

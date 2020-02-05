@@ -36,11 +36,15 @@ public class ProxyChecker {
 
     private boolean isEnabled = true;
 
-    private ProxyBroker proxyBroker;
+    private ProxyBroker broker;
 
-    public ProxyChecker(ProxyBroker proxyBroker) {
-        this.properties = ProxyConfiguration.proxyProperties();
-        this.proxyBroker = proxyBroker;
+    public ProxyChecker(ProxyBroker broker) {
+        this(ProxyConfiguration.proxyProperties(), broker);
+    }
+
+    public ProxyChecker(ProxyProperties properties, ProxyBroker broker) {
+        this.properties = properties;
+        this.broker = broker;
         proxyCheckExecutor =
             Executors.newFixedThreadPool(
                 this.properties
@@ -112,7 +116,7 @@ public class ProxyChecker {
     private Runnable validationRun() {
         return () -> {
             while (isValidationRunsEnabled()) {
-                List<Proxy> proxies = proxyBroker.getProxies(new ProxyQuery());
+                List<Proxy> proxies = broker.getProxies(new ProxyQuery());
                 logger.debug(String.format("Validation run w/ %d proxies", proxies.size()));
                 check(proxies);
                 ThreadUtils.sleep(getValidationRunDelay());

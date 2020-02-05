@@ -63,7 +63,8 @@ public class ProxyProperties {
             return validationMinValidatorsCount;
         }
 
-        public ProxyCheckPolicy setValidationMinValidatorsCount(Integer validationMinValidatorsCount) {
+        public ProxyCheckPolicy setValidationMinValidatorsCount(
+            Integer validationMinValidatorsCount) {
             this.validationMinValidatorsCount = validationMinValidatorsCount;
             return this;
         }
@@ -185,7 +186,27 @@ public class ProxyProperties {
 
     public static class ProxyProviderConfiguration {
         String url;
-        String protocols;
+        String pageUrl;
+        String format;
+        String protocol;
+
+        public String getFormat() {
+            return format;
+        }
+
+        public ProxyProviderConfiguration setFormat(String format) {
+            this.format = format;
+            return this;
+        }
+
+        public String getPageUrl() {
+            return pageUrl;
+        }
+
+        public ProxyProviderConfiguration setPageUrl(String pageUrl) {
+            this.pageUrl = pageUrl;
+            return this;
+        }
 
         public String getUrl() {
             return url;
@@ -196,12 +217,12 @@ public class ProxyProperties {
             return this;
         }
 
-        public String getProtocols() {
-            return protocols;
+        public String getProtocol() {
+            return protocol;
         }
 
-        public ProxyProviderConfiguration setProtocols(String protocols) {
-            this.protocols = protocols;
+        public ProxyProviderConfiguration setProtocol(String protocols) {
+            this.protocol = protocols;
             return this;
         }
 
