@@ -1,45 +1,57 @@
 proxy:
   providers:
-      refresh:
-          autorefresh: true
-          refreshDelaySeconds: 600
-      providers:
-        - url: http://www.proxylists.net/
-          protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25'
-          pageUrl: http://www.proxylists.net/us_{page}.html 
-          format: html
-        - url: http://ipaddress.com/proxy-list/
-          protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
-          format: html
-        - url: https://www.sslproxies.org/
-          protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
-          format: html
-        - url: http://proxytime.ru/http
-          protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
-          format: html
-        - url: https://free-proxy-list.net/
-          protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
-          format: html
-        - url: https://us-proxy.org/
-          protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
-          format: html
-        - url: http://www.httptunnel.ge/ProxyListForFree.aspx
-          protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
-          format: html
-        - url: http://pubproxy.com/api/proxy?limit=20&format=txt
-          protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25'
-          format: txt
-        - url: https://www.proxy-list.download/api/v0/get?l=en&t=http
-          protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25'
-          format: proxy-list
-        - url: https://www.proxynova.com/proxy-server-list/
-          protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
-          format: html
-        - url: http://free-proxy.cz
-          pageUrl: http://free-proxy.cz/en/proxylist/main/{page}
-          format: free-proxy.cz
-        - url: www.freeproxylists.net
-          pageUrl: www.freeproxylists.net/?page={page}
-          format: freeproxylists.net
-    
-      
+    refresh:
+      autorefresh: true
+      refreshDelaySeconds: 600
+    providers:
+    - url: http://www.proxylists.net/
+      protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25'
+      pageUrl: http://www.proxylists.net/us_{page}.html 
+      format: html
+    - url: http://ipaddress.com/proxy-list/
+      protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
+      format: html
+    - url: https://www.sslproxies.org/
+      protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
+      format: html
+    - url: http://proxytime.ru/http
+      protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
+      format: html
+    - url: https://free-proxy-list.net/
+      protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
+      format: html
+    - url: https://us-proxy.org/
+      protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
+      format: html
+    - url: http://www.httptunnel.ge/ProxyListForFree.aspx
+      protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
+      format: html
+    - url: http://pubproxy.com/api/proxy?limit=20&format=txt
+      protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25'
+      format: txt
+    - url: https://www.proxy-list.download/api/v0/get?l=en&t=http
+      protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25'
+      format: proxy-list
+    - url: https://www.proxynova.com/proxy-server-list/
+      protocol: 'HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25' 
+      format: html
+    - url: http://free-proxy.cz
+      pageUrl: http://free-proxy.cz/en/proxylist/main/{page}
+      format: free-proxy.cz
+    - url: www.freeproxylists.net
+      pageUrl: www.freeproxylists.net/?page={page}
+      format: freeproxylists.net
+  proxies:
+    check:
+      testOnBorrow: false
+      testOnCreate: true
+      minValidationIntervalSeconds: 60
+      timeBetweenValidationRunsSeconds: 300
+      validationMaxConnectionsCount: 10
+      validationIntervalSeconds: 60
+      validationMinValidatorsCount: 1  
+      validators:
+        - url: http://httpbin.org/get?show_env
+        - url: https://httpbin.org/get?show_env
+        - url: http://azenv.net/
+        - url: https://www.proxy-listen.de/azenv.php

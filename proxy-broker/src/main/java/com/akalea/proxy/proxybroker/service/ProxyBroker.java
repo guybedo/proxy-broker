@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -22,7 +19,6 @@ import com.akalea.proxy.proxybroker.domain.configuration.ProxyConfiguration;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties;
 import com.akalea.proxy.proxybroker.utils.ThreadUtils;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public class ProxyBroker {
 
@@ -34,19 +30,19 @@ public class ProxyBroker {
     private Map<String, Proxy>  proxies   =
         Collections.synchronizedMap(new HashMap<String, Proxy>());
 
-    private Executor      proxyProviderParseExecutor;
-    private LocalDateTime lastProxyProviderParsing;
+    private ProxyChecker            proxyChecker;
+    private ProxyProviderRepository providerRepository;
 
     private Random rand = new Random();
 
     public ProxyBroker() {
         this.properties = ProxyConfiguration.proxyProperties();
+        this.proxyChecker = new ProxyChecker(this);
+        this.providerRepository = new ProxyProviderRepository(this, this.proxyChecker);
     }
 
     public void init() {
-        proxyProviderParseExecutor = Executors.newFixedThreadPool(1);
-        loadProviders();
-        startProxyProviderParsing();
+        this.providerRepository.init();
     }
 
     public Proxy randomProxy() {
@@ -75,6 +71,12 @@ public class ProxyBroker {
         return found;
     }
 
+    public void addProxy(Proxy proxy, boolean overwrite) {
+        if (this.proxies.containsKey(proxy.getUrl()) && !overwrite)
+            return;
+        this.proxies.put(proxy.getUrl(), proxy);
+    }
+
     private List<Proxy> executeProxyQuery(ProxyQuery query) {
         return this.proxies
             .values()
@@ -88,97 +90,6 @@ public class ProxyBroker {
                     .ofNullable(query.getCount())
                     .orElse(Integer.MAX_VALUE))
             .collect(Collectors.toList());
-    }
-
-    public void loadProviders() {
-        loadProviders(true, null);
-    }
-
-    public void loadProviders(
-        boolean loadDefaultProviders,
-        List<ProxyProvider> additionalProviders) {
-        if (loadDefaultProviders)
-            this.providers =
-                properties
-                    .getProxy()
-                    .getProviders()
-                    .getProviders()
-                    .stream()
-                    .map(p -> new ProxyProvider().setUrl(p.getUrl()))
-                    .collect(Collectors.toList());
-        this.providers.addAll(
-            Optional
-                .ofNullable(additionalProviders)
-                .orElse(Lists.newArrayList()));
-    }
-
-    public void startProxyProviderParsing() {
-        proxyProviderParseExecutor.execute(proxyParseTask());
-    }
-
-    private Runnable proxyParseTask() {
-        return () -> {
-            if (!isProxyProviderAutoRefresh()) {
-                parseProxyProviders();
-                return;
-            }
-
-            while (isProxyProviderAutoRefresh()) {
-                int delaySeconds =
-                    Optional
-                        .ofNullable(
-                            this.properties
-                                .getProxy()
-                                .getProviders()
-                                .getRefresh()
-                                .getRefreshDelaySeconds())
-                        .orElse(10 * 60);
-                LocalDateTime next =
-                    Optional
-                        .ofNullable(lastProxyProviderParsing)
-                        .map(d -> d.plusSeconds(delaySeconds))
-                        .orElse(LocalDateTime.now());
-                if (next.isBefore(LocalDateTime.now())) {
-                    parseProxyProviders();
-                    lastProxyProviderParsing = LocalDateTime.now();
-                } else
-                    ThreadUtils.sleep(1000);
-            }
-        };
-    }
-
-    public boolean isProxyProviderAutoRefresh() {
-        return this.properties
-            .getProxy()
-            .getProviders()
-            .getRefresh()
-            .isAutorefresh();
-    }
-
-    private void parseProxyProviders() {
-        try {
-            logger.debug("Parsing proxy providers");
-            Map<String, Proxy> fetchedProxies = new ProxyProviderParser(providers).parse();
-            Map<String, Proxy> newProxies =
-                Sets
-                    .difference(fetchedProxies.keySet(), this.proxies.keySet())
-                    .stream()
-                    .map(k -> fetchedProxies.get(k))
-                    .collect(Collectors.toMap(p -> p.getUrl(), p -> p));
-            logger.debug(String.format("Found %d new proxies", newProxies.size()));
-            new ProxyChecker().check(
-                Lists.newArrayList(newProxies.values()),
-                getCheckedProxyHandler());
-        } catch (Exception e) {
-            logger.error("Error parsing proxy providers", e);
-        }
-    }
-
-    private Consumer<Proxy> getCheckedProxyHandler() {
-        return (proxy) -> {
-            if (!this.proxies.containsKey(proxy.getUrl()))
-                this.proxies.put(proxy.getUrl(), proxy);
-        };
     }
 
 }

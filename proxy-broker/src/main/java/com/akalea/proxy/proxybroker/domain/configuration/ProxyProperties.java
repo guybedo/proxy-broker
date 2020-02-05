@@ -2,6 +2,7 @@ package com.akalea.proxy.proxybroker.domain.configuration;
 
 import java.util.List;
 
+import com.akalea.proxy.proxybroker.domain.ProxyValidator;
 import com.google.common.collect.Lists;
 
 public class ProxyProperties {
@@ -10,6 +11,16 @@ public class ProxyProperties {
 
     public static class Proxy {
         private ProxyProviders providers = new ProxyProviders();
+        private Proxies        proxies   = new Proxies();
+
+        public Proxies getProxies() {
+            return proxies;
+        }
+
+        public Proxy setProxies(Proxies proxies) {
+            this.proxies = proxies;
+            return this;
+        }
 
         public ProxyProviders getProviders() {
             return providers;
@@ -17,6 +28,109 @@ public class ProxyProperties {
 
         public Proxy setProviders(ProxyProviders providers) {
             this.providers = providers;
+            return this;
+        }
+
+    }
+
+    public static class Proxies {
+        private ProxyCheckPolicy check = new ProxyCheckPolicy();
+
+        public ProxyCheckPolicy getCheck() {
+            return check;
+        }
+
+        public Proxies setCheck(ProxyCheckPolicy check) {
+            this.check = check;
+            return this;
+        }
+
+    }
+
+    public static class ProxyCheckPolicy {
+
+        private Boolean testOnBorrow;
+        private Boolean testOnCreate;
+        private Integer minValidationIntervalSeconds;
+        private Integer timeBetweenValidationRunsSeconds;
+        private Integer validationMaxConnectionsCount;
+        private Integer validationIntervalSeconds;
+        private Integer validationMinValidatorsCount;
+
+        private List<ProxyValidator> validators = Lists.newArrayList();
+
+        public Integer getValidationMinValidatorsCount() {
+            return validationMinValidatorsCount;
+        }
+
+        public ProxyCheckPolicy setValidationMinValidatorsCount(Integer validationMinValidatorsCount) {
+            this.validationMinValidatorsCount = validationMinValidatorsCount;
+            return this;
+        }
+
+        public Boolean getTestOnBorrow() {
+            return testOnBorrow;
+        }
+
+        public ProxyCheckPolicy setTestOnBorrow(Boolean testOnBorrow) {
+            this.testOnBorrow = testOnBorrow;
+            return this;
+        }
+
+        public Boolean getTestOnCreate() {
+            return testOnCreate;
+        }
+
+        public ProxyCheckPolicy setTestOnCreate(Boolean testOnCreate) {
+            this.testOnCreate = testOnCreate;
+            return this;
+        }
+
+        public Integer getMinValidationIntervalSeconds() {
+            return minValidationIntervalSeconds;
+        }
+
+        public ProxyCheckPolicy setMinValidationIntervalSeconds(
+            Integer minValidationIntervalSeconds) {
+            this.minValidationIntervalSeconds = minValidationIntervalSeconds;
+            return this;
+        }
+
+        public Integer getTimeBetweenValidationRunsSeconds() {
+            return timeBetweenValidationRunsSeconds;
+        }
+
+        public ProxyCheckPolicy setTimeBetweenValidationRunsSeconds(
+            Integer timeBetweenValidationRunsSeconds) {
+            this.timeBetweenValidationRunsSeconds = timeBetweenValidationRunsSeconds;
+            return this;
+        }
+
+        public Integer getValidationMaxConnectionsCount() {
+            return validationMaxConnectionsCount;
+        }
+
+        public ProxyCheckPolicy setValidationMaxConnectionsCount(
+            Integer validationMaxConnectionsCount) {
+            this.validationMaxConnectionsCount = validationMaxConnectionsCount;
+            return this;
+        }
+
+        public Integer getValidationIntervalSeconds() {
+            return validationIntervalSeconds;
+        }
+
+        public ProxyCheckPolicy setValidationIntervalSeconds(Integer validationIntervalSeconds) {
+            this.validationIntervalSeconds = validationIntervalSeconds;
+            return this;
+        }
+
+        public List<ProxyValidator> getValidators() {
+            return validators;
+        }
+
+        public ProxyCheckPolicy setValidators(List<ProxyValidator> validators) {
+            this.validators = validators;
             return this;
         }
 
