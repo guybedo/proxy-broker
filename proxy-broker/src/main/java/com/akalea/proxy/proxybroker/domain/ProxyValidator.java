@@ -1,9 +1,10 @@
 package com.akalea.proxy.proxybroker.domain;
 
+import java.net.URI;
+
 public class ProxyValidator {
 
     private String url;
-    private String scheme;
 
     public String getUrl() {
         return url;
@@ -15,12 +16,11 @@ public class ProxyValidator {
     }
 
     public String getScheme() {
-        return scheme;
-    }
-
-    public ProxyValidator setScheme(String format) {
-        this.scheme = format;
-        return this;
+        try {
+            return new URI(url).getScheme();
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("Could not guess scheme from url %s", url));
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 package com.akalea.proxy.proxybroker.service;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -8,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -91,7 +89,7 @@ public class ProxyChecker {
                 .map(t -> check(t))
                 .filter(r -> r)
                 .count();
-        logger.debug(String.format("Submitted %d proxies for validation", submitted));
+        logger.info(String.format("Checking %d proxies", submitted));
     }
 
     private boolean check(ProxyCheckTask task) {

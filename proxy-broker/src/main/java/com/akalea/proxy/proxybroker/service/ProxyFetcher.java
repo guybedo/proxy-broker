@@ -32,22 +32,33 @@ public class ProxyFetcher {
     private LocalDateTime   lastFetch;
 
     private ProxyProviderRepository providerRepository;
-    private ProxyBroker             broker;
-    private ProxyChecker            checker;
 
+    private ProxyBroker  broker;
+    private ProxyChecker checker;
+
+    private boolean             started;
     private List<ProxyProvider> providers;
 
-    public ProxyFetcher(ProxyBroker broker, ProxyChecker checker) {
-        this(ProxyConfiguration.proxyProperties(), broker, checker);
+    public ProxyFetcher(
+        ProxyBroker broker,
+        ProxyChecker checker) {
+        this(ProxyConfiguration.proxyProperties(), broker, checker, new ProxyProviderRepository());
     }
 
-    public ProxyFetcher(ProxyProperties properties, ProxyBroker broker, ProxyChecker checker) {
+    public ProxyFetcher(
+        ProxyProperties properties,
+        ProxyBroker broker,
+        ProxyChecker checker,
+        ProxyProviderRepository providerRepository) {
         this.properties = properties;
+        this.providerRepository = providerRepository;
         this.broker = broker;
         this.checker = checker;
     }
 
     public void start() {
+        this.started = true;
+        logger.info("Starting proxy fetcher");
         loadProviders();
         startFetcherThread();
     }
@@ -59,23 +70,30 @@ public class ProxyFetcher {
     public void loadProviders(
         boolean loadDefaultProviders,
         List<ProxyProvider> additionalProviders) {
-        if (loadDefaultProviders)
-            this.providers =
-                properties
-                    .getProxy()
-                    .getProviders()
-                    .getProviders()
-                    .stream()
-                    .map(
-                        p -> new ProxyProvider()
-                            .setUrl(p.getUrl())
-                            .setPageUrl(p.getPageUrl())
-                            .setFormat(p.getFormat()))
-                    .collect(Collectors.toList());
-        this.providers.addAll(
-            Optional
-                .ofNullable(additionalProviders)
-                .orElse(Lists.newArrayList()));
+        try {
+            if (loadDefaultProviders) {
+                logger.info("Loading default proxy providers");
+                this.providers =
+                    properties
+                        .getProxy()
+                        .getProviders()
+                        .getProviders()
+                        .stream()
+                        .map(
+                            p -> new ProxyProvider()
+                                .setUrl(p.getUrl())
+                                .setPageUrl(p.getPageUrl())
+                                .setFormat(p.getFormat()))
+                        .collect(Collectors.toList());
+            }
+            this.providers.addAll(
+                Optional
+                    .ofNullable(additionalProviders)
+                    .orElse(Lists.newArrayList()));
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public void startFetcherThread() {
@@ -156,5 +174,11 @@ public class ProxyFetcher {
             .getProviders()
             .getRefresh()
             .isAutorefresh();
+
     }
+
+    public boolean isStarted() {
+        return started;
+    }
+
 }

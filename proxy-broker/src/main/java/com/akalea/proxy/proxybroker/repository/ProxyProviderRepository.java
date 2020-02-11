@@ -24,30 +24,40 @@ public class ProxyProviderRepository {
     private final Logger logger = LoggerFactory.getLogger(ProxyProviderRepository.class);
 
     public Map<String, Proxy> fetchProvidersProxies(List<ProxyProvider> providers) {
-        return providers
-            .stream()
-            .map(pp -> fetchProviderProxies(pp))
-            .flatMap(List::stream)
-            .collect(Collectors.toMap(p -> p.getUrl(), p -> p));
+        Map<String, Proxy> proxies =
+            providers
+                .stream()
+                .map(pp -> fetchProviderProxies(pp))
+                .flatMap(List::stream)
+                .collect(
+                    Collectors.toMap(
+                        p -> p.getUrl(),
+                        p -> p,
+                        (p1, p2) -> p1));
+        logger.info(String.format("Found %d unique proxies", proxies.size()));
+        return proxies;
     }
 
     public List<Proxy> fetchProviderProxies(ProxyProvider provider) {
+        logger.info(String.format("Fetching proxies from provider %s", provider.getUrl()));
         provider.setLastStatusUpdate(LocalDate.now());
         try {
-            ProxyDataParser parser =
-                Optional
-                    .ofNullable(ProxyDataParser.getParser(provider.getFormat()))
-                    .orElseThrow(
-                        () -> new RuntimeException(
-                            String.format("Missing parser for format %s", provider.getFormat())));
-            List<String> pages = fetchProxyProviderData(provider);
-            List<Proxy> proxies =
-                pages
-                    .stream()
-                    .map(p -> parser.parse(p))
-                    .flatMap(List::stream)
-                    .collect(Collectors.toList());
+            List<Proxy> proxies = Lists.newArrayList();
+            if (StringUtils.isEmpty(provider.getPageUrl()))
+                proxies = extractProxiesFromPageData(provider, fetchData(provider.getPageUrl()));
+            else {
+                int page = 0;
+                List<Proxy> pageProxies;
+                while (!(pageProxies = extractProxiesFromPage(provider, page++)).isEmpty()) {
+                    proxies.addAll(pageProxies);
+                }
+            }
             provider.setStatus(proxies.isEmpty() ? ProxyStatus.ko : ProxyStatus.ok);
+            logger.info(
+                String.format(
+                    "Found %d proxies from provider %s",
+                    proxies.size(),
+                    provider.getUrl()));
             return proxies;
         } catch (Exception e) {
             logger.error(
@@ -56,38 +66,48 @@ public class ProxyProviderRepository {
         }
     }
 
-    private List<String> fetchProxyProviderData(ProxyProvider provider) {
-        if (StringUtils.isEmpty(provider.getPageUrl()))
-            return Lists.newArrayList(
-                Unirest
-                    .get(provider.getUrl())
-                    .asString()
-                    .getBody());
-        else
-            return fetchPages(provider.getPageUrl());
+    private List<Proxy> extractProxiesFromPage(ProxyProvider provider, int page) {
+        try {
+            String pageData = fetchPage(page, provider.getPageUrl());
+            return extractProxiesFromPageData(provider, pageData);
+        } catch (Exception e) {
+            logger.warn(
+                "Error extracting proxies from provider %s page %d",
+                provider.getUrl(),
+                page);
+            return Lists.newArrayList();
+        }
     }
 
-    public List<String> fetchPages(String urlPattern) {
-        List<String> pages = Lists.newArrayList();
-        try {
-            int page = 0;
-            while (true) {
-                String url = urlPattern.replaceAll("\\{page\\}", String.valueOf(page));
-                logger.debug(String.format("Fetching provider page data from %s", url));
-                HttpResponse<String> resp =
-                    Unirest
-                        .get(url)
-                        .asString();
-                if (resp.isSuccess()) {
-                    pages.add(resp.getBody());
-                    page++;
-                } else
-                    return pages;
-            }
-        } catch (Exception e) {
-            logger.error("Error fetching pages", e);
-            return pages;
-        }
+    private List<Proxy> extractProxiesFromPageData(ProxyProvider provider, String pageData) {
+        if (StringUtils.isEmpty(pageData))
+            return Lists.newArrayList();
+        ProxyDataParser parser =
+            Optional
+                .ofNullable(ProxyDataParser.getParser(provider.getFormat()))
+                .orElseThrow(
+                    () -> new RuntimeException(
+                        String.format("Missing parser for format %s", provider.getFormat())));
+        List<Proxy> proxies = parser.parse(pageData);
+        return proxies;
+    }
+
+    public String fetchPage(int page, String urlPattern) {
+        String url = urlPattern.replaceAll("\\{page\\}", String.valueOf(page));
+        logger.debug(String.format("Fetching provider page data from %s", url));
+        return fetchData(url);
+
+    }
+
+    private String fetchData(String url) {
+        HttpResponse<String> resp =
+            Unirest
+                .get(url)
+                .asString();
+        if (resp.isSuccess()) {
+            return resp.getBody();
+        } else
+            return null;
 
     }
 }

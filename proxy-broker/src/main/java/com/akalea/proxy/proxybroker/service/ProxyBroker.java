@@ -16,6 +16,7 @@ import com.akalea.proxy.proxybroker.domain.Proxy;
 import com.akalea.proxy.proxybroker.domain.ProxyQuery;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyConfiguration;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties;
+import com.akalea.proxy.proxybroker.repository.ProxyProviderRepository;
 import com.akalea.proxy.proxybroker.utils.ThreadUtils;
 
 public class ProxyBroker {
@@ -48,7 +49,9 @@ public class ProxyBroker {
         this.fetcher = fetcher;
     }
 
-    public void setup() {
+    private void startFetcherIfNeeded() {
+        if (this.fetcher.isStarted())
+            return;
         this.fetcher.start();
     }
 
@@ -62,14 +65,16 @@ public class ProxyBroker {
     }
 
     public List<Proxy> getProxies(ProxyQuery query) {
+        startFetcherIfNeeded();
         boolean wait = Optional.ofNullable(query.getWait()).orElse(false);
         if (!wait)
             return executeProxyQuery(query);
 
         Long maxWait =
             Optional
-                .ofNullable(query.getMaxWait().getSeconds())
-                .orElse(1l);
+                .ofNullable(query.getMaxWait())
+                .map(d -> d.getSeconds())
+                .orElse(1 * 3600l);
         List<Proxy> found;
         LocalDateTime start = LocalDateTime.now();
         while ((found = executeProxyQuery(query)).isEmpty()

@@ -68,6 +68,16 @@ public class FreeProxyCzParserTest extends TestCase {
                 .collect(Collectors.toSet());
         System.out.println(actual);
         Assert.assertEquals(expected, actual);
+
+        proxies =
+            new FreeProxyCzParser().parse(
+                FileUtils.readFileToString(
+                    new File(
+                        this.getClass()
+                            .getClassLoader()
+                            .getResource("free-proxy-cz-2.html")
+                            .getFile())));
+        Assert.assertTrue(proxies.size() > 0);
     }
 
 }
