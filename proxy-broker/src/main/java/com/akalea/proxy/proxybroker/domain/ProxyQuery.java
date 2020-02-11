@@ -4,11 +4,21 @@ import java.time.Duration;
 
 public class ProxyQuery {
 
-    private Integer count;
-    private Float   minSuccessRate;
+    private Integer     count;
+    private ProxyStatus status = ProxyStatus.ok;
+    private Float       minSuccessRate;
 
-    private Boolean  wait;
-    private Duration maxWait;
+    private Boolean  wait    = true;
+    private Duration maxWait = Duration.ofHours(1);
+
+    public ProxyStatus getStatus() {
+        return status;
+    }
+
+    public ProxyQuery setStatus(ProxyStatus status) {
+        this.status = status;
+        return this;
+    }
 
     public void wait(Duration maxWait) {
         this.wait = true;

@@ -2,6 +2,8 @@ package com.akalea.proxy.proxybroker.utils;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 public class ThreadUtils {
@@ -25,6 +27,15 @@ public class ThreadUtils {
             while (!evaluation.get() && limit.isAfter(LocalDateTime.now()))
                 Thread.sleep(evaluationIntervalMsec);
         } catch (InterruptedException e) {
+        }
+    }
+
+    public static void shutdown(ExecutorService executor, long timeout, TimeUnit unit) {
+        try {
+            executor.shutdown();
+            executor.awaitTermination(timeout, unit);
+        } catch (Exception e) {
+            return;
         }
     }
 

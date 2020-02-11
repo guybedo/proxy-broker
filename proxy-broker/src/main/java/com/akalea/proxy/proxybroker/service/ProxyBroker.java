@@ -14,10 +14,12 @@ import org.slf4j.LoggerFactory;
 
 import com.akalea.proxy.proxybroker.domain.Proxy;
 import com.akalea.proxy.proxybroker.domain.ProxyQuery;
+import com.akalea.proxy.proxybroker.domain.ProxyStatus;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyConfiguration;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties;
 import com.akalea.proxy.proxybroker.repository.ProxyProviderRepository;
 import com.akalea.proxy.proxybroker.utils.ThreadUtils;
+import com.google.common.collect.Lists;
 
 public class ProxyBroker {
 
@@ -61,11 +63,11 @@ public class ProxyBroker {
     }
 
     public Proxy randomProxy(Float minSuccessRate) {
-        List<Proxy> valid = getProxies(new ProxyQuery().setMinSuccessRate(minSuccessRate));
+        List<Proxy> valid = findProxies(new ProxyQuery().setMinSuccessRate(minSuccessRate));
         return valid.get(rand.nextInt(valid.size()));
     }
 
-    public List<Proxy> getProxies(ProxyQuery query) {
+    public List<Proxy> findProxies(ProxyQuery query) {
         startComponentsIfNeeded();
         boolean wait = Optional.ofNullable(query.getWait()).orElse(false);
         if (!wait)
@@ -76,12 +78,14 @@ public class ProxyBroker {
                 .ofNullable(query.getMaxWait())
                 .map(d -> d.getSeconds())
                 .orElse(1 * 3600l);
-        List<Proxy> found;
         LocalDateTime start = LocalDateTime.now();
-        while ((found = executeProxyQuery(query)).isEmpty()
-            && start.plusSeconds(maxWait).isAfter(LocalDateTime.now()))
+        while (start.plusSeconds(maxWait).isAfter(LocalDateTime.now())) {
+            List<Proxy> found = executeProxyQuery(query);
+            if (!found.isEmpty() && (query.getCount() == null || found.size() >= query.getCount()))
+                return found;
             ThreadUtils.sleep(50);
-        return found;
+        }
+        return Lists.newArrayList();
     }
 
     public void addProxy(Proxy proxy, boolean overwrite) {
@@ -94,6 +98,7 @@ public class ProxyBroker {
         return this.proxies
             .values()
             .stream()
+            .filter(p -> query.getStatus() == null || query.getStatus().equals(p.getLastCheck()))
             .filter(
                 p -> p.getSuccessRate() >= Optional
                     .ofNullable(query.getMinSuccessRate())
@@ -101,6 +106,7 @@ public class ProxyBroker {
             .limit(
                 Optional
                     .ofNullable(query.getCount())
+                    .map(c -> c > 0 ? c : Integer.MAX_VALUE)
                     .orElse(Integer.MAX_VALUE))
             .collect(Collectors.toList());
     }

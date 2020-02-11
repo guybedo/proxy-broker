@@ -42,7 +42,11 @@ public class ProxyFetcher {
     public ProxyFetcher(
         ProxyBroker broker,
         ProxyChecker checker) {
-        this(ProxyConfiguration.proxyProperties(), broker, checker, new ProxyProviderRepository());
+        this(
+            ProxyConfiguration.proxyProperties(),
+            broker,
+            checker,
+            new ProxyProviderRepository());
     }
 
     public ProxyFetcher(
@@ -72,7 +76,7 @@ public class ProxyFetcher {
         List<ProxyProvider> additionalProviders) {
         try {
             if (loadDefaultProviders) {
-                logger.info("Loading default proxy providers");
+                logger.debug("Loading default proxy providers");
                 this.providers =
                     properties
                         .getProxy()
@@ -134,6 +138,10 @@ public class ProxyFetcher {
                         .map(d -> d.plusSeconds(delaySeconds))
                         .orElse(LocalDateTime.now().minusMinutes(1));
                 if (next.isBefore(LocalDateTime.now())) {
+                    logger.info(
+                        String.format(
+                            "Found %d valid proxies so far",
+                            broker.findProxies(new ProxyQuery()).size()));
                     fetchNewProxies();
                     lastFetch = LocalDateTime.now();
                 } else
@@ -144,10 +152,10 @@ public class ProxyFetcher {
 
     private void fetchNewProxies() {
         try {
-            logger.info("Fetching new proxies");
+            logger.debug("Fetching new proxies");
             Set<String> currentProxies =
                 this.broker
-                    .getProxies(new ProxyQuery())
+                    .findProxies(new ProxyQuery())
                     .stream()
                     .map(p -> p.getUrl())
                     .collect(Collectors.toSet());
@@ -159,7 +167,7 @@ public class ProxyFetcher {
                     .stream()
                     .map(k -> fetchedProxies.get(k))
                     .collect(Collectors.toMap(p -> p.getUrl(), p -> p));
-            logger.info(String.format("Found %d new proxies", newProxies.size()));
+            logger.info(String.format("Fetched %d new proxies from providers", newProxies.size()));
             checker.check(
                 Lists.newArrayList(newProxies.values()),
                 (p) -> this.broker.addProxy(p, false));

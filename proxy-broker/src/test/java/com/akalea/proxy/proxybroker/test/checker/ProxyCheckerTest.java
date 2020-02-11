@@ -40,14 +40,10 @@ public class ProxyCheckerTest extends TestCase {
         PowerMockito.mockStatic(Unirest.class);
 
         GetRequest ok = Mockito.mock(GetRequest.class);
-        GetRequest proxy = Mockito.mock(GetRequest.class);
-        Mockito
-            .when(ok.proxy(ArgumentMatchers.any(), ArgumentMatchers.anyInt()))
-            .thenReturn(proxy);
         HttpResponse okResponse = Mockito.mock(HttpResponse.class);
         Mockito.when(okResponse.isSuccess()).thenReturn(true);
         Mockito.when(okResponse.getBody()).thenReturn("");
-        Mockito.when(proxy.asString()).thenReturn(okResponse);
+        Mockito.when(ok.asString()).thenReturn(okResponse);
 
         List<String> validationUrls =
             ProxyConfiguration
@@ -73,7 +69,7 @@ public class ProxyCheckerTest extends TestCase {
         Consumer<Proxy> handler = (p) -> checked.put(p.getUrl(), p);
         ProxyCheckTask task =
             new ProxyCheckTask()
-                .setProxy(new Proxy().setUrl("http://test.com"))
+                .setProxy(new Proxy().setUrl("test.com"))
                 .setHandler(handler);
         checker.checkProxy(task);
         Assert.assertEquals(ProxyStatus.ok, task.getProxy().getLastCheck());

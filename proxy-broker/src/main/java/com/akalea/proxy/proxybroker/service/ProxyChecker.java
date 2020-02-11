@@ -1,6 +1,5 @@
 package com.akalea.proxy.proxybroker.service;
 
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,10 +23,9 @@ import com.akalea.proxy.proxybroker.domain.ProxyValidator;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyConfiguration;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties.ProxyCheckPolicy;
+import com.akalea.proxy.proxybroker.utils.HttpUtils;
 import com.akalea.proxy.proxybroker.utils.ThreadUtils;
 import com.google.common.collect.Lists;
-
-import kong.unirest.Unirest;
 
 public class ProxyChecker {
 
@@ -98,7 +96,7 @@ public class ProxyChecker {
                 .map(t -> check(t))
                 .filter(r -> r)
                 .count();
-        logger.info(String.format("Checking %d proxies", submitted));
+        logger.debug(String.format("Checking %d proxies", submitted));
     }
 
     private boolean check(ProxyCheckTask task) {
@@ -144,18 +142,18 @@ public class ProxyChecker {
 
         proxy.setLastCheck(
             validatedCount >= requiredValidationCount ? ProxyStatus.ok : ProxyStatus.ko);
+        logger.debug(
+            String.format(
+                "Proxy %s is %s",
+                proxy.getUrl(),
+                proxy.getLastCheck().toString()));
         task.getHandler().accept(proxy);
     }
 
     private boolean isRequestProxyingOk(Proxy proxy, String targetUrl) {
         try {
-            URL proxyUrl = new URL(proxy.getUrl());
-            String proxyHost = proxyUrl.getHost();
-            int proxyPort = proxyUrl.getPort() > 0 ? proxyUrl.getPort() : 80;
-            return Unirest
-                .get(targetUrl)
-                .proxy(proxyHost, proxyPort)
-                .asString()
+            return HttpUtils
+                .getRequest(targetUrl, proxy)
                 .isSuccess();
         } catch (Exception e) {
             logger.debug(String.format("Proxying error w/ proxy %s", proxy.getUrl()), e);
@@ -166,7 +164,7 @@ public class ProxyChecker {
     private Runnable validationRun() {
         return () -> {
             while (isValidationRunsEnabled()) {
-                List<Proxy> proxies = broker.getProxies(new ProxyQuery());
+                List<Proxy> proxies = broker.findProxies(new ProxyQuery().setStatus(null));
                 if (!proxies.isEmpty()) {
                     logger.debug(String.format("Validation run w/ %d proxies", proxies.size()));
                     check(proxies);

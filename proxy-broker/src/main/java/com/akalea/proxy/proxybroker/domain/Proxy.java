@@ -1,7 +1,9 @@
 package com.akalea.proxy.proxybroker.domain;
 
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.common.collect.Lists;
@@ -16,6 +18,27 @@ public class Proxy {
     private LocalDateTime lastCheckDate;
 
     private Stats stats = new Stats();
+
+    public String getHost() {
+        return toURL().getHost();
+    }
+
+    public int getPort() {
+        URL proxyUrl = toURL();
+        return proxyUrl.getPort() > 0 ? proxyUrl.getPort() : 80;
+    }
+
+    public URL toURL() {
+        try {
+            return new URL(
+                Optional
+                    .of(getUrl())
+                    .filter(u -> u.toLowerCase().startsWith("http"))
+                    .orElse(String.format("http://%s", getUrl())));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void incOkCount() {
         this.stats.ok.incrementAndGet();

@@ -36,7 +36,7 @@ public class GetProxies {
         log.addAppender(logConsoleAppender);
 
         ProxyBroker proxyBroker = new ProxyBroker();
-        List<Proxy> proxies = proxyBroker.getProxies(new ProxyQuery().setCount(10).setWait(true));
+        List<Proxy> proxies = proxyBroker.findProxies(new ProxyQuery().setCount(10).setWait(true));
         System.out.println(String.format("Found %d proxies", proxies.size()));
     }
 
