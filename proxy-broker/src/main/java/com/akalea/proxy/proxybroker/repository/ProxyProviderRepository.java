@@ -13,13 +13,26 @@ import org.slf4j.LoggerFactory;
 import com.akalea.proxy.proxybroker.domain.Proxy;
 import com.akalea.proxy.proxybroker.domain.ProxyProvider;
 import com.akalea.proxy.proxybroker.domain.ProxyStatus;
+import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties;
 import com.akalea.proxy.proxybroker.domain.parser.ProxyDataParser;
+import com.akalea.proxy.proxybroker.utils.ThreadUtils;
 import com.google.common.collect.Lists;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 
 public class ProxyProviderRepository {
+
+    private ProxyProperties properties;
+
+    public ProxyProviderRepository() {
+
+    }
+
+    public ProxyProviderRepository(ProxyProperties properties) {
+        super();
+        this.properties = properties;
+    }
 
     private final Logger logger = LoggerFactory.getLogger(ProxyProviderRepository.class);
 
@@ -50,6 +63,7 @@ public class ProxyProviderRepository {
                 List<Proxy> pageProxies;
                 while (!(pageProxies = extractProxiesFromPage(provider, page++)).isEmpty()) {
                     proxies.addAll(pageProxies);
+                    ThreadUtils.sleep(getDelayBetweenPageFetches());
                 }
             }
             provider.setStatus(proxies.isEmpty() ? ProxyStatus.ko : ProxyStatus.ok);
@@ -72,9 +86,10 @@ public class ProxyProviderRepository {
             return extractProxiesFromPageData(provider, pageData);
         } catch (Exception e) {
             logger.warn(
-                "Error extracting proxies from provider %s page %d",
-                provider.getUrl(),
-                page);
+                String.format(
+                    "Error extracting proxies from provider %s page %d",
+                    provider.getUrl(),
+                    page));
             return Lists.newArrayList();
         }
     }
@@ -108,6 +123,16 @@ public class ProxyProviderRepository {
             return resp.getBody();
         } else
             return null;
+    }
 
+    public int getDelayBetweenPageFetches() {
+        return Optional
+            .ofNullable(
+                this.properties
+                    .getProxy()
+                    .getProviders()
+                    .getRefresh()
+                    .getDelayBetweenPageFetchesMsecs())
+            .orElse(1000);
     }
 }

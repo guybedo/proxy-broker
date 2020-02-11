@@ -49,10 +49,11 @@ public class ProxyBroker {
         this.fetcher = fetcher;
     }
 
-    private void startFetcherIfNeeded() {
-        if (this.fetcher.isStarted())
-            return;
-        this.fetcher.start();
+    private void startComponentsIfNeeded() {
+        if (!this.fetcher.isStarted())
+            this.fetcher.start();
+        if (!this.checker.isStarted())
+            this.checker.start();
     }
 
     public Proxy randomProxy() {
@@ -65,7 +66,7 @@ public class ProxyBroker {
     }
 
     public List<Proxy> getProxies(ProxyQuery query) {
-        startFetcherIfNeeded();
+        startComponentsIfNeeded();
         boolean wait = Optional.ofNullable(query.getWait()).orElse(false);
         if (!wait)
             return executeProxyQuery(query);

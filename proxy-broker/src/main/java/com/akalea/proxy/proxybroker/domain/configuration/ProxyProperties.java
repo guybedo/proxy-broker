@@ -162,7 +162,28 @@ public class ProxyProperties {
 
     public static class ProxyProviderRefreshPolicy {
         private boolean autorefresh;
-        private int     refreshDelaySeconds;
+        private Integer refreshDelaySeconds;
+        private Integer refreshThreadCount;
+        private Integer delayBetweenPageFetchesMsecs;
+
+        public Integer getRefreshThreadCount() {
+            return refreshThreadCount;
+        }
+
+        public ProxyProviderRefreshPolicy setRefreshThreadCount(Integer refreshThreadCount) {
+            this.refreshThreadCount = refreshThreadCount;
+            return this;
+        }
+
+        public Integer getDelayBetweenPageFetchesMsecs() {
+            return delayBetweenPageFetchesMsecs;
+        }
+
+        public ProxyProviderRefreshPolicy setDelayBetweenPageFetchesMsecs(
+            Integer delayBetweenPageFetchesSeconds) {
+            this.delayBetweenPageFetchesMsecs = delayBetweenPageFetchesSeconds;
+            return this;
+        }
 
         public boolean isAutorefresh() {
             return autorefresh;
@@ -173,11 +194,11 @@ public class ProxyProperties {
             return this;
         }
 
-        public int getRefreshDelaySeconds() {
+        public Integer getRefreshDelaySeconds() {
             return refreshDelaySeconds;
         }
 
-        public ProxyProviderRefreshPolicy setRefreshDelaySeconds(int refreshDelaySeconds) {
+        public ProxyProviderRefreshPolicy setRefreshDelaySeconds(Integer refreshDelaySeconds) {
             this.refreshDelaySeconds = refreshDelaySeconds;
             return this;
         }

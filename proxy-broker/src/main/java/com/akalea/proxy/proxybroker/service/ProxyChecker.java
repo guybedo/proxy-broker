@@ -42,7 +42,8 @@ public class ProxyChecker {
     private Map<String, ProxyCheckTask> checkingTasks =
         new HashMap<String, ProxyChecker.ProxyCheckTask>();
 
-    private boolean isEnabled = true;
+    private boolean enabled = true;
+    private boolean started = false;
 
     private ProxyBroker broker;
 
@@ -56,21 +57,27 @@ public class ProxyChecker {
     }
 
     public void start() {
-        int connectionCount =
-            this.properties
-                .getProxy()
-                .getProxies()
-                .getCheck()
-                .getValidationMaxConnectionsCount();
-        checkExecutor = Executors.newFixedThreadPool(connectionCount);
-        IntStream
-            .range(0, connectionCount)
-            .mapToObj(i -> proxyValidator())
-            .forEach(v -> checkExecutor.execute(v));
+        this.started = true;
+        try {
+            int connectionCount =
+                this.properties
+                    .getProxy()
+                    .getProxies()
+                    .getCheck()
+                    .getValidationMaxConnectionsCount();
+            checkExecutor = Executors.newFixedThreadPool(connectionCount);
+            IntStream
+                .range(0, connectionCount)
+                .mapToObj(i -> proxyValidator())
+                .forEach(v -> checkExecutor.execute(v));
 
-        if (isValidationRunsEnabled()) {
-            validationRunExecutor = Executors.newFixedThreadPool(1);
-            validationRunExecutor.execute(validationRun());
+            if (isValidationRunsEnabled()) {
+                validationRunExecutor = Executors.newFixedThreadPool(1);
+                validationRunExecutor.execute(validationRun());
+            }
+        } catch (Exception e) {
+            logger.error("Error starting checker", e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -82,6 +89,8 @@ public class ProxyChecker {
     }
 
     public void check(List<Proxy> proxies, Consumer<Proxy> checkedProxyHandler) {
+        if (!started)
+            start();
         long submitted =
             proxies
                 .stream()
@@ -96,14 +105,14 @@ public class ProxyChecker {
         String taskUuid = task.getProxy().getUrl();
         if (checking.contains(taskUuid))
             return false;
-        checking.offer(taskUuid);
         checkingTasks.put(taskUuid, task);
+        checking.offer(taskUuid);
         return true;
     }
 
     private Runnable proxyValidator() {
         return () -> {
-            while (isEnabled) {
+            while (enabled) {
                 try {
                     String uuid = this.checking.poll(1, TimeUnit.DAYS);
                     checkProxy(this.checkingTasks.remove(uuid));
@@ -158,14 +167,16 @@ public class ProxyChecker {
         return () -> {
             while (isValidationRunsEnabled()) {
                 List<Proxy> proxies = broker.getProxies(new ProxyQuery());
-                logger.debug(String.format("Validation run w/ %d proxies", proxies.size()));
-                check(proxies);
-                ThreadUtils.sleep(getValidationRunDelay());
+                if (!proxies.isEmpty()) {
+                    logger.debug(String.format("Validation run w/ %d proxies", proxies.size()));
+                    check(proxies);
+                }
+                ThreadUtils.sleep(getValidationRunDelaySeconds() * 1000);
             }
         };
     }
 
-    private int getValidationRunDelay() {
+    private int getValidationRunDelaySeconds() {
         return Optional
             .ofNullable(
                 getProxyCheckPolicy()
@@ -180,6 +191,10 @@ public class ProxyChecker {
 
     private ProxyCheckPolicy getProxyCheckPolicy() {
         return this.properties.getProxy().getProxies().getCheck();
+    }
+
+    public boolean isStarted() {
+        return started;
     }
 
     public static class ProxyCheckTask {

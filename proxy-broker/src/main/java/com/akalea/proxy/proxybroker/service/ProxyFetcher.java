@@ -90,9 +90,9 @@ public class ProxyFetcher {
                 Optional
                     .ofNullable(additionalProviders)
                     .orElse(Lists.newArrayList()));
+            logger.info(String.format("Loaded %d providers", this.providers.size()));
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Error loading default proxy providers", e);
         }
     }
 
@@ -132,7 +132,7 @@ public class ProxyFetcher {
                     Optional
                         .ofNullable(lastFetch)
                         .map(d -> d.plusSeconds(delaySeconds))
-                        .orElse(LocalDateTime.now());
+                        .orElse(LocalDateTime.now().minusMinutes(1));
                 if (next.isBefore(LocalDateTime.now())) {
                     fetchNewProxies();
                     lastFetch = LocalDateTime.now();
