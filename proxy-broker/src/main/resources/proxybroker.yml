@@ -16,6 +16,12 @@ proxy:
       pageUrl: http://www.freeproxylists.net/?page={page}
       protocol: HTTP,HTTPS 
       format: freeproxylists.net
+    - url: https://www.sslproxies.org/
+      protocol: HTTP,HTTPS 
+      format: html
+    - url: https://www.proxy-list.download/api/v0/get?l=en&t=http
+      protocol: HTTP,HTTPS
+      format: proxy-list
   proxies:
     check:
       testOnBorrow: false
