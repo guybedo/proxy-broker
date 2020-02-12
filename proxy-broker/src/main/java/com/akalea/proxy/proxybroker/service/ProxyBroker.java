@@ -36,7 +36,11 @@ public class ProxyBroker {
     private Random rand = new Random();
 
     public ProxyBroker() {
-        this.properties = ProxyConfiguration.proxyProperties();
+        this(ProxyConfiguration.proxyProperties());
+    }
+
+    public ProxyBroker(ProxyProperties properties) {
+        this.properties = properties;
         this.checker = new ProxyChecker(this);
         this.fetcher = new ProxyFetcher(this, this.checker);
     }
@@ -92,6 +96,16 @@ public class ProxyBroker {
         if (this.proxies.containsKey(proxy.getUrl()) && !overwrite)
             return;
         this.proxies.put(proxy.getUrl(), proxy);
+    }
+
+    public void evictProxies(List<String> urls) {
+        try {
+            urls
+                .stream()
+                .forEach(u -> this.proxies.remove(u));
+        } catch (Exception e) {
+            logger.error("Error evicting proxies", e);
+        }
     }
 
     private List<Proxy> executeProxyQuery(ProxyQuery query) {

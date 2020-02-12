@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.akalea.proxy.proxybroker.domain.Proxy;
 import com.akalea.proxy.proxybroker.domain.ProxyProvider;
 import com.akalea.proxy.proxybroker.domain.ProxyQuery;
+import com.akalea.proxy.proxybroker.domain.ProxyStatus;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyConfiguration;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties;
 import com.akalea.proxy.proxybroker.repository.ProxyProviderRepository;
@@ -111,7 +113,16 @@ public class ProxyFetcher {
                     logger.error("Error while trying to stop executor", e);
                 }
             });
-        this.fetcherExecutor = Executors.newFixedThreadPool(1);
+        this.fetcherExecutor =
+            Executors.newFixedThreadPool(
+                1,
+                new ThreadFactory() {
+                    public Thread newThread(Runnable r) {
+                        Thread thread = new Thread(r);
+                        thread.setName("ProxyFetcher");
+                        return thread;
+                    }
+                });
         fetcherExecutor.execute(fetchThread());
     }
 
@@ -140,8 +151,13 @@ public class ProxyFetcher {
                 if (next.isBefore(LocalDateTime.now())) {
                     logger.info(
                         String.format(
-                            "Found %d valid proxies so far",
-                            broker.findProxies(new ProxyQuery()).size()));
+                            "%d valid proxies in DB so far",
+                            broker
+                                .findProxies(
+                                    new ProxyQuery()
+                                        .setStatus(ProxyStatus.ok)
+                                        .setWait(false))
+                                .size()));
                     fetchNewProxies();
                     lastFetch = LocalDateTime.now();
                 } else
@@ -155,7 +171,10 @@ public class ProxyFetcher {
             logger.debug("Fetching new proxies");
             Set<String> currentProxies =
                 this.broker
-                    .findProxies(new ProxyQuery())
+                    .findProxies(
+                        new ProxyQuery()
+                            .setWait(false)
+                            .setStatus(null))
                     .stream()
                     .map(p -> p.getUrl())
                     .collect(Collectors.toSet());

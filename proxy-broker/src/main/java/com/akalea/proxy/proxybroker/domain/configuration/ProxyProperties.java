@@ -34,7 +34,17 @@ public class ProxyProperties {
     }
 
     public static class Proxies {
-        private ProxyCheckPolicy check = new ProxyCheckPolicy();
+        private ProxyCheckPolicy    check    = new ProxyCheckPolicy();
+        private ProxyEvictionPolicy eviction = new ProxyEvictionPolicy();
+
+        public ProxyEvictionPolicy getEviction() {
+            return eviction;
+        }
+
+        public Proxies setEviction(ProxyEvictionPolicy eviction) {
+            this.eviction = eviction;
+            return this;
+        }
 
         public ProxyCheckPolicy getCheck() {
             return check;
@@ -42,6 +52,41 @@ public class ProxyProperties {
 
         public Proxies setCheck(ProxyCheckPolicy check) {
             this.check = check;
+            return this;
+        }
+
+    }
+
+    public static class ProxyEvictionPolicy {
+        private Boolean evictKoProxies             = true;
+        private Integer evictionIntervalSeconds    = 5 * 60;
+        private Integer evictionProxyMaxAgeSeconds = 4 * 60 * 60;
+
+        public Boolean getEvictKoProxies() {
+            return evictKoProxies;
+        }
+
+        public ProxyEvictionPolicy setEvictKoProxies(Boolean evictKoProxies) {
+            this.evictKoProxies = evictKoProxies;
+            return this;
+        }
+
+        public Integer getEvictionIntervalSeconds() {
+            return evictionIntervalSeconds;
+        }
+
+        public ProxyEvictionPolicy setEvictionIntervalSeconds(Integer evictionIntervalSeconds) {
+            this.evictionIntervalSeconds = evictionIntervalSeconds;
+            return this;
+        }
+
+        public Integer getEvictionProxyMaxAgeSeconds() {
+            return evictionProxyMaxAgeSeconds;
+        }
+
+        public ProxyEvictionPolicy setEvictionProxyMaxAgeSeconds(
+            Integer evictionProxyMaxAgeSeconds) {
+            this.evictionProxyMaxAgeSeconds = evictionProxyMaxAgeSeconds;
             return this;
         }
 

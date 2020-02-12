@@ -12,12 +12,25 @@ public class Proxy {
 
     private String url;
 
+    private String username;
+    private String password;
+
     private List<String> protocols = Lists.newArrayList();
 
     private ProxyStatus   lastCheck;
     private LocalDateTime lastCheckDate;
+    private LocalDateTime lastOkDate;
 
     private Stats stats = new Stats();
+
+    public LocalDateTime getLastOkDate() {
+        return lastOkDate;
+    }
+
+    public Proxy setLastOkDate(LocalDateTime lastOkDate) {
+        this.lastOkDate = lastOkDate;
+        return this;
+    }
 
     public String getHost() {
         return toURL().getHost();
@@ -147,6 +160,28 @@ public class Proxy {
     public Proxy setLastCheckDate(LocalDateTime lastStatusUpdate) {
         this.lastCheckDate = lastStatusUpdate;
         return this;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public Proxy setUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Proxy setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public Stats getStats() {
+        return stats;
     }
 
 }

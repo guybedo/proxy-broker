@@ -9,8 +9,10 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.slf4j.Logger;
@@ -23,6 +25,7 @@ import com.akalea.proxy.proxybroker.domain.ProxyValidator;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyConfiguration;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties.ProxyCheckPolicy;
+import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties.ProxyEvictionPolicy;
 import com.akalea.proxy.proxybroker.utils.HttpUtils;
 import com.akalea.proxy.proxybroker.utils.ThreadUtils;
 import com.google.common.collect.Lists;
@@ -33,6 +36,7 @@ public class ProxyChecker {
 
     private ExecutorService checkExecutor;
     private ExecutorService validationRunExecutor;
+    private ExecutorService evictionRunExecutor;
 
     private ProxyProperties properties;
 
@@ -63,15 +67,47 @@ public class ProxyChecker {
                     .getProxies()
                     .getCheck()
                     .getValidationMaxConnectionsCount();
-            checkExecutor = Executors.newFixedThreadPool(connectionCount);
+            checkExecutor =
+                Executors.newFixedThreadPool(
+                    connectionCount,
+                    new ThreadFactory() {
+                        public Thread newThread(Runnable r) {
+                            Thread thread = new Thread(r);
+                            thread.setName("ProxyFetcherValidator");
+                            return thread;
+                        }
+                    });
             IntStream
                 .range(0, connectionCount)
                 .mapToObj(i -> proxyValidator())
                 .forEach(v -> checkExecutor.execute(v));
 
             if (isValidationRunsEnabled()) {
-                validationRunExecutor = Executors.newFixedThreadPool(1);
+                validationRunExecutor =
+                    Executors.newFixedThreadPool(
+                        1,
+                        new ThreadFactory() {
+                            public Thread newThread(Runnable r) {
+                                Thread thread = new Thread(r);
+                                thread.setName("ProxyCheckerScheduler");
+                                return thread;
+                            }
+                        });
                 validationRunExecutor.execute(validationRun());
+            }
+
+            if (isEvictionRunsEnabled()) {
+                evictionRunExecutor =
+                    Executors.newFixedThreadPool(
+                        1,
+                        new ThreadFactory() {
+                            public Thread newThread(Runnable r) {
+                                Thread thread = new Thread(r);
+                                thread.setName("ProxyCheckerEviction");
+                                return thread;
+                            }
+                        });
+                evictionRunExecutor.execute(evictionRun());
             }
         } catch (Exception e) {
             logger.error("Error starting checker", e);
@@ -156,7 +192,7 @@ public class ProxyChecker {
                 .getRequest(targetUrl, proxy)
                 .isSuccess();
         } catch (Exception e) {
-            logger.debug(String.format("Proxying error w/ proxy %s", proxy.getUrl()), e);
+            logger.debug(String.format("Proxying error w/ proxy %s", proxy.getUrl()));
             return false;
         }
     }
@@ -166,10 +202,36 @@ public class ProxyChecker {
             while (isValidationRunsEnabled()) {
                 List<Proxy> proxies = broker.findProxies(new ProxyQuery().setStatus(null));
                 if (!proxies.isEmpty()) {
-                    logger.debug(String.format("Validation run w/ %d proxies", proxies.size()));
+                    logger.info(
+                        String.format("Validation run, checking %d proxies", proxies.size()));
                     check(proxies);
                 }
                 ThreadUtils.sleep(getValidationRunDelaySeconds() * 1000);
+            }
+        };
+    }
+
+    private Runnable evictionRun() {
+        return () -> {
+            while (isEvictionRunsEnabled()) {
+                List<String> evicted =
+                    broker
+                        .findProxies(new ProxyQuery().setStatus(null))
+                        .stream()
+                        .filter(p -> ProxyStatus.ko.equals(p.getLastCheck()))
+                        .filter(
+                            p -> p.getLastOkDate() != null
+                                && p.getLastOkDate()
+                                    .plusSeconds(getEvictionProxyMaxAge())
+                                    .isBefore(LocalDateTime.now()))
+                        .map(p -> p.getUrl())
+                        .collect(Collectors.toList());
+                if (!evicted.isEmpty()) {
+                    logger.debug(
+                        String.format("Eviction run, evicting %d proxies", evicted.size()));
+                    broker.evictProxies(evicted);
+                }
+                ThreadUtils.sleep(getEvictionRunDelaySeconds() * 1000);
             }
         };
     }
@@ -187,8 +249,31 @@ public class ProxyChecker {
             .getTimeBetweenValidationRunsSeconds() > 0;
     }
 
+    private int getEvictionRunDelaySeconds() {
+        return Optional
+            .ofNullable(
+                getProxyEvictionPolicy().getEvictionIntervalSeconds())
+            .orElse(10 * 60);
+    }
+
+    private boolean isEvictionRunsEnabled() {
+        return Optional
+            .ofNullable(getProxyEvictionPolicy().getEvictKoProxies())
+            .orElse(false);
+    }
+
+    private int getEvictionProxyMaxAge() {
+        return Optional
+            .ofNullable(getProxyEvictionPolicy().getEvictionProxyMaxAgeSeconds())
+            .orElse(4 * 60 * 60);
+    }
+
     private ProxyCheckPolicy getProxyCheckPolicy() {
         return this.properties.getProxy().getProxies().getCheck();
+    }
+
+    private ProxyEvictionPolicy getProxyEvictionPolicy() {
+        return this.properties.getProxy().getProxies().getEviction();
     }
 
     public boolean isStarted() {

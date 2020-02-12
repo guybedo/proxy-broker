@@ -36,3 +36,8 @@ proxy:
         - url: https://httpbin.org/get?show_env
         - url: http://azenv.net/
         - url: https://www.proxy-listen.de/azenv.php
+    eviction:
+      evictKoProxies: true
+      evictionIntervalSeconds: 300
+      evictionProxyMaxAgeSeconds: 14400
+
