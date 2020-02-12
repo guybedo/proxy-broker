@@ -159,7 +159,6 @@ public class ProxyChecker {
 
     public void checkProxy(ProxyCheckTask task) {
         Proxy proxy = task.getProxy();
-        logger.debug(String.format("Checking proxy %s", proxy.getUrl()));
         proxy.setLastCheckDate(LocalDateTime.now());
 
         List<ProxyValidator> validators = Lists.newArrayList(getProxyCheckPolicy().getValidators());
@@ -180,7 +179,7 @@ public class ProxyChecker {
             validatedCount >= requiredValidationCount ? ProxyStatus.ok : ProxyStatus.ko);
         logger.debug(
             String.format(
-                "Proxy %s is %s",
+                "Checked proxy %s, status is %s",
                 proxy.getUrl(),
                 proxy.getLastCheck().toString()));
         task.getHandler().accept(proxy);

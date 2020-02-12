@@ -27,7 +27,7 @@ proxy:
       testOnBorrow: false
       testOnCreate: true
       minValidationIntervalSeconds: 60
-      timeBetweenValidationRunsSeconds: 300
+      timeBetweenValidationRunsSeconds: 1800
       validationMaxConnectionsCount: 10
       validationIntervalSeconds: 60
       validationMinValidatorsCount: 1  
