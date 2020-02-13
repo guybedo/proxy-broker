@@ -86,7 +86,7 @@ public class ProxyProviderRepository {
     }
 
     public List<Proxy> fetchProviderProxies(ProxyProvider provider) {
-        logger.debug(String.format("Fetching proxies from provider %s", provider.getUrl()));
+        logger.info(String.format("Fetching proxies from provider %s", provider.getUrl()));
         provider.setLastStatusUpdate(LocalDate.now());
         try {
             List<Proxy> proxies = Lists.newArrayList();
@@ -94,7 +94,7 @@ public class ProxyProviderRepository {
                 proxies =
                     extractProxiesFromPageData(
                         provider,
-                        HttpUtils.fetchData(provider.getPageUrl()));
+                        HttpUtils.fetchData(provider.getUrl()));
             else {
                 int page = 0;
                 List<Proxy> pageProxies;
