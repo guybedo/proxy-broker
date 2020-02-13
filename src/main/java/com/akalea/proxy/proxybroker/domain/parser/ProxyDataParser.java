@@ -15,6 +15,8 @@ public interface ProxyDataParser {
                 Lists.newArrayList(
                     FreeProxyCzParser.class,
                     FreeProxyListsParser.class,
+                    IpAddressParser.class,
+                    ProxyListParser.class,
                     ProxyListsParser.class,
                     HtmlTableRegexParser.class);
             return parsers
