@@ -112,7 +112,8 @@ public class ProxyProviderRepository {
             return proxies;
         } catch (Exception e) {
             logger.error(
-                String.format("Error fetching proxies from provider %s", provider.getUrl()));
+                String.format("Error fetching proxies from provider %s", provider.getUrl()),
+                e);
             return Lists.newArrayList();
         }
     }
