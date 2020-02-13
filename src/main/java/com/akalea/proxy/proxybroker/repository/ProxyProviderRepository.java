@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -23,8 +22,8 @@ import com.akalea.proxy.proxybroker.domain.ProxyStatus;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyConfiguration;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties;
 import com.akalea.proxy.proxybroker.domain.parser.ProxyDataParser;
-import com.akalea.proxy.proxybroker.utils.ThreadUtils;
 import com.akalea.proxy.proxybroker.utils.HttpUtils;
+import com.akalea.proxy.proxybroker.utils.ThreadUtils;
 import com.google.common.collect.Lists;
 
 public class ProxyProviderRepository {

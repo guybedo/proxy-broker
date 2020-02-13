@@ -14,10 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import com.akalea.proxy.proxybroker.domain.Proxy;
 import com.akalea.proxy.proxybroker.domain.ProxyQuery;
-import com.akalea.proxy.proxybroker.domain.ProxyStatus;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyConfiguration;
 import com.akalea.proxy.proxybroker.domain.configuration.ProxyProperties;
-import com.akalea.proxy.proxybroker.repository.ProxyProviderRepository;
 import com.akalea.proxy.proxybroker.utils.ThreadUtils;
 import com.google.common.collect.Lists;
 
