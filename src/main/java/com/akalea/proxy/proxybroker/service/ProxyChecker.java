@@ -117,7 +117,8 @@ public class ProxyChecker {
 
     public void check(List<Proxy> proxies) {
         Consumer<Proxy> dummyHandler = (p) -> {
-            return;
+            if (!ProxyStatus.ok.equals(p.getLastCheck()))
+                broker.evictProxies(Lists.newArrayList(p.getHost()));
         };
         check(proxies, dummyHandler);
     }
@@ -128,7 +129,10 @@ public class ProxyChecker {
         long submitted =
             proxies
                 .stream()
-                .map(p -> new ProxyCheckTask().setProxy(p).setHandler(checkedProxyHandler))
+                .map(
+                    p -> new ProxyCheckTask()
+                        .setProxy(p)
+                        .setHandler(checkedProxyHandler))
                 .map(t -> check(t))
                 .filter(r -> r)
                 .count();
@@ -149,7 +153,9 @@ public class ProxyChecker {
             while (enabled) {
                 try {
                     String uuid = this.checking.poll(1, TimeUnit.DAYS);
-                    checkProxy(this.checkingTasks.remove(uuid));
+                    Optional
+                        .ofNullable(this.checkingTasks.remove(uuid))
+                        .ifPresent(p -> checkProxy(p));
                 } catch (Exception e) {
                     logger.error("Error processing check task", e);
                 }
@@ -158,6 +164,8 @@ public class ProxyChecker {
     }
 
     public void checkProxy(ProxyCheckTask task) {
+        if (task == null)
+            return;
         Proxy proxy = task.getProxy();
         proxy.setLastCheckDate(LocalDateTime.now());
 
@@ -199,11 +207,15 @@ public class ProxyChecker {
     private Runnable validationRun() {
         return () -> {
             while (isValidationRunsEnabled()) {
-                List<Proxy> proxies = broker.findProxies(new ProxyQuery().setStatus(null));
-                if (!proxies.isEmpty()) {
-                    logger.info(
-                        String.format("Validation run, checking %d proxies", proxies.size()));
-                    check(proxies);
+                try {
+                    List<Proxy> proxies = broker.findProxies(new ProxyQuery().setStatus(null));
+                    if (!proxies.isEmpty()) {
+                        logger.info(
+                            String.format("Validation run, checking %d proxies", proxies.size()));
+                        check(proxies);
+                    }
+                } catch (Exception e) {
+                    logger.error("Error running validations", e);
                 }
                 ThreadUtils.sleep(getValidationRunDelaySeconds() * 1000);
             }

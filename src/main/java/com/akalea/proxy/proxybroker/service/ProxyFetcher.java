@@ -134,34 +134,39 @@ public class ProxyFetcher {
             }
 
             while (isProxyProviderAutoRefresh()) {
-                int delaySeconds =
-                    Optional
-                        .ofNullable(
-                            this.properties
-                                .getProxy()
-                                .getProviders()
-                                .getRefresh()
-                                .getRefreshDelaySeconds())
-                        .orElse(10 * 60);
-                LocalDateTime next =
-                    Optional
-                        .ofNullable(lastFetch)
-                        .map(d -> d.plusSeconds(delaySeconds))
-                        .orElse(LocalDateTime.now().minusMinutes(1));
-                if (next.isBefore(LocalDateTime.now())) {
-                    logger.info(
-                        String.format(
-                            "%d valid proxies in DB so far",
-                            broker
-                                .findProxies(
-                                    new ProxyQuery()
-                                        .setStatus(ProxyStatus.ok)
-                                        .setWait(false))
-                                .size()));
-                    fetchNewProxies();
-                    lastFetch = LocalDateTime.now();
-                } else
+                try {
+                    int delaySeconds =
+                        Optional
+                            .ofNullable(
+                                this.properties
+                                    .getProxy()
+                                    .getProviders()
+                                    .getRefresh()
+                                    .getRefreshDelaySeconds())
+                            .orElse(10 * 60);
+                    LocalDateTime next =
+                        Optional
+                            .ofNullable(lastFetch)
+                            .map(d -> d.plusSeconds(delaySeconds))
+                            .orElse(LocalDateTime.now().minusMinutes(1));
+                    if (next.isBefore(LocalDateTime.now())) {
+                        logger.info(
+                            String.format(
+                                "%d valid proxies in DB so far",
+                                broker
+                                    .findProxies(
+                                        new ProxyQuery()
+                                            .setStatus(ProxyStatus.ok)
+                                            .setWait(false))
+                                    .size()));
+                        fetchNewProxies();
+                        lastFetch = LocalDateTime.now();
+                    }
+                } catch (Exception e) {
+                    logger.error(String.format("Error in proxy fetch thread", e));
+                } finally {
                     ThreadUtils.sleep(1000);
+                }
             }
         };
     }
@@ -189,7 +194,13 @@ public class ProxyFetcher {
             logger.info(String.format("Fetched %d new proxies from providers", newProxies.size()));
             checker.check(
                 Lists.newArrayList(newProxies.values()),
-                (p) -> this.broker.addProxy(p, false));
+                (p) -> {
+                    if (ProxyStatus.ok.equals(p.getLastCheck()))
+                        this.broker.addProxy(p, false);
+                    else
+                        logger.info(
+                            String.format("Proxy %s is ko, not added to list", p.getHost()));
+                });
         } catch (Exception e) {
             logger.error("Error parsing proxy providers", e);
         }

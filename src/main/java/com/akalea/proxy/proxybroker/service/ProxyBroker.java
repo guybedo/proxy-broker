@@ -98,6 +98,7 @@ public class ProxyBroker {
 
     public void evictProxies(List<String> urls) {
         try {
+            logger.info("Evicting %d ko proxies", urls.size());
             urls
                 .stream()
                 .forEach(u -> this.proxies.remove(u));
