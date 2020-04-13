@@ -115,12 +115,12 @@ public class ProxyChecker {
         }
     }
 
-    public void check(List<Proxy> proxies) {
-        Consumer<Proxy> dummyHandler = (p) -> {
+    private void validateExistingProxies(List<Proxy> proxies) {
+        Consumer<Proxy> handler = (p) -> {
             if (!ProxyStatus.ok.equals(p.getLastCheck()))
                 broker.evictProxies(Lists.newArrayList(p.getHost()));
         };
-        check(proxies, dummyHandler);
+        check(proxies, handler);
     }
 
     public void check(List<Proxy> proxies, Consumer<Proxy> checkedProxyHandler) {
@@ -212,7 +212,7 @@ public class ProxyChecker {
                     if (!proxies.isEmpty()) {
                         logger.info(
                             String.format("Validation run, checking %d proxies", proxies.size()));
-                        check(proxies);
+                        validateExistingProxies(proxies);
                     }
                 } catch (Exception e) {
                     logger.error("Error running validations", e);
