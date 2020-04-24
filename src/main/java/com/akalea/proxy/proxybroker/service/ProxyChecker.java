@@ -225,22 +225,26 @@ public class ProxyChecker {
     private Runnable evictionRun() {
         return () -> {
             while (isEvictionRunsEnabled()) {
-                List<String> evicted =
-                    broker
-                        .findProxies(new ProxyQuery().setStatus(null))
-                        .stream()
-                        .filter(p -> ProxyStatus.ko.equals(p.getLastCheck()))
-                        .filter(
-                            p -> p.getLastOkDate() != null
-                                && p.getLastOkDate()
-                                    .plusSeconds(getEvictionProxyMaxAge())
-                                    .isBefore(LocalDateTime.now()))
-                        .map(p -> p.getUrl())
-                        .collect(Collectors.toList());
-                if (!evicted.isEmpty()) {
-                    logger.debug(
-                        String.format("Eviction run, evicting %d proxies", evicted.size()));
-                    broker.evictProxies(evicted);
+                try {
+                    List<String> evicted =
+                        broker
+                            .findProxies(new ProxyQuery().setStatus(null))
+                            .stream()
+                            .filter(p -> ProxyStatus.ko.equals(p.getLastCheck()))
+                            .filter(
+                                p -> p.getLastOkDate() != null
+                                    && p.getLastOkDate()
+                                        .plusSeconds(getEvictionProxyMaxAge())
+                                        .isBefore(LocalDateTime.now()))
+                            .map(p -> p.getUrl())
+                            .collect(Collectors.toList());
+                    if (!evicted.isEmpty()) {
+                        logger.debug(
+                            String.format("Eviction run, evicting %d proxies", evicted.size()));
+                        broker.evictProxies(evicted);
+                    }
+                } catch (Exception e) {
+                    logger.error("Error running evictions", e);
                 }
                 ThreadUtils.sleep(getEvictionRunDelaySeconds() * 1000);
             }
